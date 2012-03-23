@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Unix即集成開發環境
+Unix 即集成开发环境
 =========================
 
 Contents:
@@ -13,12 +13,12 @@ Contents:
    
    前言 <introduction>
    文件 <files>
-   編輯器 <editing>
-   編譯 <compiling>
+   编辑器 <editing>
+   编译 <compiling>
    生成 <building>
-   錯誤排除 <debug>
+   错误排查 <debug>
    版本控制 <revisions>
-   寫在後面的話 <conclude>
+   写在后面的话 <conclude>
 
 Indices and tables
 ==================
