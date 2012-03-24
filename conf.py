@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Unix即集成開發環境 documentation build configuration file, created by
+# Unix 即集成开发环境 documentation build configuration file, created by
 # sphinx-quickstart on Tue Feb 28 02:37:06 2012.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -40,7 +40,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Unix即集成開發環境'
+project = u'Unix 即集成开发环境'
 copyright = u'2012, Conan'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -183,7 +183,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'Uni.tex', u'Unix即集成開發環境 Documentation',
+  ('index', 'Uni.tex', u'Unix 即集成开发环境 Documentation',
    u'Conan', 'manual'),
 ]
 
@@ -213,7 +213,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'uni', u'Unix即集成開發環境 Documentation',
+    ('index', 'uni', u'Unix 即集成开发环境 Documentation',
      [u'Conan'], 1)
 ]
 
@@ -227,7 +227,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'Uni', u'Unix即集成開發環境 Documentation',
+  ('index', 'Uni', u'Unix 即集成开发环境 Documentation',
    u'Conan', 'Uni', 'One line description of project.',
    'Miscellaneous'),
 ]
@@ -245,7 +245,7 @@ texinfo_documents = [
 # -- Options for Epub output ---------------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = u'Unix即集成開發環境'
+epub_title = u'Unix 即集成开发环境'
 epub_author = u'Conan'
 epub_publisher = u'Conan'
 epub_copyright = u'2012, Conan'
