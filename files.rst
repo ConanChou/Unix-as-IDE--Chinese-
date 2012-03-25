@@ -116,4 +116,26 @@
     
     $ grep -R 'someVar' . | grep -vF '.svn'
 
+当然，还有另外一种很流行的 `代替 grep <http://betterthangrep.com/>`_ 的工具叫做 ``ack``\，默认情况下它就帮你把上面那些个麻烦的东西免除了。它同样也支持大多数黑客最爱的 Perl 兼容的正则表达式（PCRE）。而且它还有很多实用功能来帮助你完成有关源代码的工作。当然使用古朴的 ``grep`` 没什么不好的，无论怎样它是 Unix 系统自带的，但是如果你可以安装 ``ack``\，我还是非常推荐的。现在你已经可以很容易地用个叫 ``ack-grep`` Debian 包或者一个 Perl 脚本来安装。
 
+我提到用一些较新的 Perl 脚本来代替经典工具 ``grep`` 可能会让一些 Unix 纯粹主义者很不爽。但是我不认为 Unix 哲学或以 Unix 作 IDE ，就是非要在有一些可用来解决新问题的工具时反而使用一些“古典”工具，毕竟这些新工具跟那些“古典”工具在思想上是一致的。
+
+文件元数据
+----------
+
+``file`` 工具可以对所给的文件一行简短的介绍，它用文件后缀、头部信息和一些其他的线索来判断文件。你在检查一堆你不熟悉的文件时把它和 ``find`` 和 ``xargs`` 组合使用就非常方便了： ::
+    
+    $ find | xargs file
+    .:            directory
+    ./hanoi:      Perl script, ASCII text executable
+    ./.hanoi.swp: Vim swap file, version 7.3
+    ./factorial:  Perl script, ASCII text executable
+    ./bits.c:     C source, ASCII text
+    ./bits:       ELF 32-bit LSB executable, Intel 80386, version ...
+
+匹配文件
+--------
+
+作为本篇文章的最后一个技巧，我会建议你学习一些有关模式匹配和 Bash 下的括号表达式。你可以在我之前的一篇叫做 `Bash shell expansion <http://blog.sanctum.geek.nz/bash-shell-expansion/>`_ 的文章里看到。
+
+以上便把经典 Unix 命令行变成了一个可在编程项目中使用的非常强大的文件管理器。
