@@ -28,6 +28,7 @@ Unix 即集成开发环境
    编辑器 <editing>
    编译 <compiling>
    生成 <building>
+<<<<<<< HEAD
    错误排除 <debug>
    版本控制 <revisions>
    写在后面的话 <conclude>
@@ -37,6 +38,11 @@ Unix 即集成开发环境
 
 * 使用的是 `sphinx <http://sphinx.pocoo.org/>`_ 文档生成器。
 * 项目主页 `Unix as IDE (Chinese) <https://github.com/ConanChou/Unix-as-IDE--Chinese->`_\。
+=======
+   错误排查 <debug>
+   版本控制 <revisions>
+   写在后面的话 <conclude>
+>>>>>>> intro
 
 贡献者
 ------
