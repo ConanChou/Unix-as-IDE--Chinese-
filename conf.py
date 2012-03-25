@@ -231,7 +231,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'Uni', u'Unix 即集成开发环境',
-   u'Conan', 'Uni', 'One line description of project.',
+   u'Conan', 'Uni', 'A Chinese translation of Tom Ryder\'s series: Unix as IDE',
    'Miscellaneous'),
 ]
 

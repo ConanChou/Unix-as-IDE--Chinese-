@@ -3,11 +3,12 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+=========================
 Unix 即集成开发环境
 =========================
 
 动机
-----
+====
 
 前阵子，我在 `Hacker News <http://news.ycombinator.com/>`_ 上看到一个Tom Ryder的系列文章， `谈关于Unix和IDE（集成开发环境）的 <http://blog.sanctum.geek.nz/series/unix-as-ide/>`_\。其实类似的文章在HN上经常看到，只是由于我是开源和Vim狂热者才会每次都点开看看——每次都能学到新的东西。
 
@@ -16,9 +17,6 @@ Unix 即集成开发环境
 如果您对此话题很感兴趣，不妨也读一读 `The unix programming environment <http://www.iu.hio.no/~mark/unix/unix_toc.html>`_\。如果你现在还在大学里，也不妨上一些有关的课程，一定会对你的职业生涯有很大的帮助。
 
 **最后声明** ，我并不想鼓吹使用某种开发工具或使用某种工作流程，和此系列作者一样，只普及知识。如果这个系列的文章颠覆了你的世界观，你因此变成了 Unix 粉，我们概不负责。
-
-目录
-----
 
 .. toctree::
    :maxdepth: 2
@@ -33,13 +31,13 @@ Unix 即集成开发环境
    写在后面的话 <conclude>
 
 项目说明
---------
+========
 
 * 使用的是 `sphinx <http://sphinx.pocoo.org/>`_ 文档生成器。
 * 项目主页 `Unix as IDE (Chinese) <https://github.com/ConanChou/Unix-as-IDE--Chinese->`_\。
 
 贡献者
-------
+======
 
 本翻译项目的贡献者： `ConanChou <https://github.com/ConanChou>`_\,  `KarenMeu <https://github.com/karenmeu>`_\。
 
