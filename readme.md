@@ -12,6 +12,6 @@
 * 项目主页[Unix as IDE (Chinese)](https://github.com/ConanChou/Unix-as-IDE--Chinese-)。
 
 # 贡献者
-本翻译项目的贡献者是：[ConanChou](https://github.com/ConanChou), [KarenMeu](https://github.com/karenmeu)。
+本翻译项目的贡献者是：[ConanChou](https://github.com/ConanChou), [KarenMeu](https://github.com/karenmeu), [TiefuHou](https://github.com/TiefuHou)。
 
 
