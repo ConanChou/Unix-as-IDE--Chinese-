@@ -186,11 +186,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-<<<<<<< HEAD
   ('index', 'Uni.tex', u'Unix 即集成开发环境',
-=======
-  ('index', 'Uni.tex', u'Unix 即集成开发环境 Documentation',
->>>>>>> intro
    u'Conan', 'manual'),
 ]
 
@@ -220,11 +216,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-<<<<<<< HEAD
     ('index', 'uni', u'Unix 即集成开发环境',
-=======
-    ('index', 'uni', u'Unix 即集成开发环境 Documentation',
->>>>>>> intro
      [u'Conan'], 1)
 ]
 
@@ -238,11 +230,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-<<<<<<< HEAD
   ('index', 'Uni', u'Unix 即集成开发环境',
-=======
-  ('index', 'Uni', u'Unix 即集成开发环境 Documentation',
->>>>>>> intro
    u'Conan', 'Uni', 'One line description of project.',
    'Miscellaneous'),
 ]

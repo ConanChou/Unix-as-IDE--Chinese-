@@ -49,7 +49,7 @@ Vim 对 ``ctags`` 实用工具的输出 `支持得很好 <http://amix.dk/blog/po
 
 用 ``:tn`` 和 ``:tp``\，你就可以遍历搜索结果了。自带的标签功能已经可以满足你大部分的需求了，但是像标签列表窗口这样的功能，你可以是是安装很受欢迎的 `Taglist 插件 <http://vim-taglist.sourceforge.net/>`_\。Tim Pope 的 `Unimpaired 插件 <https://github.com/tpope/vim-unimpaired>`_ 也有一些有用的相关映射。
 
-呼叫外部程序
+调用外部程序
 ------------
 
 有两中主要方法可以在 Vim 里调用外部程序：
@@ -64,4 +64,4 @@ Vim 对 ``ctags`` 实用工具的输出 `支持得很好 <http://amix.dk/blog/po
 Lint 程序和句法检查器
 ---------------------
 
-
+用调用外部程序（如 ``perl -c``\, ``gcc``\）来检测句法是
