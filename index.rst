@@ -21,7 +21,7 @@ Unix 即集成开发环境
 ----
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    
    前言 <introduction>
    文件 <files>

@@ -62,6 +62,71 @@ Vim 对 ``ctags`` 实用工具的输出 `支持得很好 <http://amix.dk/blog/po
     Vim 不是 Shell 也不是操作系统。你不能在 Vim 里跑 Shell 也不能用它来控制调试器。相反的：把 Vim 当作 Shell 或 IDE 的一部分。
 
 Lint 程序和句法检查器
----------------------
+`````````````````````
 
-用调用外部程序（如 ``perl -c``\, ``gcc``\）来检测句法是
+调用外部程序（如 ``perl -c``\, ``gcc``\）来检测句法是在 Vim 里用 ``:!`` 很好的例子。如果你在编写 Perl 文件，就可以这样跑： ::
+    
+    :!perl -c %
+
+    /home/tom/project/test.pl syntax OK
+
+    Press Enter or type command to continue
+
+上面的百分号 ``%`` 是一种表示当前显示内容的简略方式。如果运行的命令有回显，那回显就会显示在命令下方。如果你需要经常调用句法检查器，你也可以在 ``.vimrc`` 里把它设置成命令，甚至再设置一个组合键。在这个例子里，我们可以定义一个 ``:PerlLint`` 命令，并且可以在正常模式下用 ``\l`` 触发（译者按：1. 作者指的正常模式是相对于 Vim 里的输入模式和选择模式； 2. 作者 Vim 的 ``<leader>``
+键是用的 ``\``\，这个设置因人而异）： ::
+    
+    command PerlLint !perl -c %
+    nnoremap <leader>l :PerlLint<CR>
+
+对不少语言而言其实都有一个更好的办法来实现以上的事情，而且将要谈的这个方法能让我们利用起 Vim 自带的 quickfix 窗口。首先我们要对特定的文件类型设置一个合适的 ``makeprg``\,在这个例子里面，包含可以被 Vim 用以输出到 quicklist 的模块并定义两种输出格式： ::
+    
+    :set makeprg=perl\ -c\ -MVi::QuickFix\ %
+    :set errorformat+=%m\ at\ %f\ line\ %l\.
+    :set errorformat+=%m\ at\ %f\ line\ %l
+
+你有可能先得从 CPAN 或 Debian 包管理器安装 ``libvi-quickfix-perl`` 模块。安装完成，保存文档，然后输入 ``:make`` 来检查句法。如果找到错误了，你可以用 ``:copen`` 打开 quicklist 窗口检查那些错误。用 ``:cn`` 和 ``:cp`` 上下移动。
+
+.. figure:: origin/vim-quickfix.png
+   :alt: vim-quickfix
+
+   用 Vim quickfix 检测一个 Perl 文件
+
+这种方法同样也适用于 `gcc <http://tldp.org/HOWTO/C-editing-with-VIM-HOWTO/quickfix.html>`_ 的输出，以及几乎其他任何一种句法检测的输出，输出包括文件名、行号、错误信息。它甚至可以支持 `像 PHP 一样专注于网页的语言 <http://stackoverflow.com/questions/7193547/debugging-php-with-vim-using-quickfix>`_\，还有像 `JSLint for JavaScript <https://github.com/hallettj/jslint.vim>`_
+这样的工具。另外还有一个非常棒的插件叫 `Syntastic <http://www.vim.org/scripts/script.php?script_id=2736>`_ 也有类似的功效。
+
+从其他命令读取输出
+``````````````````
+你可以用 ``:r!`` 把呼叫命令的回显直接贴到当前工作的文档里。例如，把当前目录的文档列表放进当前编辑文件就可以输入： ::
+    
+    :r!ls
+
+这种读取方式当然不光可以用在命令回显；你可以用 ``:r`` 轻松读进其他文件的内容，比如你的公钥或是你自定义的样版文件： ::
+    
+    :r ~/.ssh/id_rsa.pub
+    :r ~/dev/perl/boilerplate/copyright.pl
+
+用其他命令过滤输出
+``````````````````
+加以延伸，其实你可以把 Vim buffer 里的文字放进外部命令过滤，或者是用选择模式选择一个文本区块，然后用命令的输出覆盖。因为 Vim 的块状选择模式很适合用在柱形数据，所以它很适合配合 ``column``\、 ``cut``\、 ``sort``\、 ``awk`` 等类似的工具使用。
+
+例如，你可以将整个文件按第二列逆序排列： ::
+    
+    :%!sort -k2 -r
+
+你可以在所选则文字中找到符合 ``/vim/`` 样式并只显示其中的第三列： ::
+    
+    :'<,'>!awk '/vim/ {print $3}'
+
+你也可以把前10行的关键词用漂亮的行列格式排好： ::
+    
+    :1,10!column -t
+
+真的，所有类型的文字过滤器或命令都可以像上面的例子一样用在 Vim 里，一个简单的互操作性就可以让编辑器的能力无限延伸。这很有效地将 Vim buffer 变成了字符流，而字符流正是这些经典工具之间用以交流的语言。
+
+自带的其他选择
+``````````````
+值得注意的是，像排序和查找之类常见的操作，Vim 有其自带的方法 ``:sort`` 和 ``:grep``\，这些或许在你在 Windows 下用 Vim 时遇到困难时很有帮助，但是这些自带方法并不具备适应 shell 命令的能力。
+
+对比文件
+--------
+
