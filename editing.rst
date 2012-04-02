@@ -130,3 +130,28 @@ Lint 程序和句法检查器
 对比文件
 --------
 
+Vim 有个 *diffing* 模式，即 ``vimdiff``\，它不当允许你查看不同版本文件间的区别，还提供三向合并用以解决版本冲突，你可以用 ``:diffput`` 和 ``:diffget`` 这样的命令来选择合适的代码段。你可以在命令行下直接运行 ``vimdiff``\，需要至少两个文件才能做对比： ::
+    
+    $ vimdiff file-v1.c file-v2.c
+
+.. figure:: origin/vim-diff.png
+   :scale: 70%
+   :alt: vim-diff
+
+   用 Vimdiff 对比 .vimrc 文件
+
+版本控制
+--------
+
+你可以在 Vim 下直接调用版本控制的命令，这可能也是你大多数时候最需要的。``%`` 永远是当前激活显示窗口的内容，记住这点非常有用： ::
+    
+    :!svn status
+    :!svn add %
+    :!git commit -a
+
+最近集成 Git 功能到 Vim 的冠军插件很明显就是 Tim Pope 的 `Fugitive <https://github.com/tpope/vim-fugitive>`_ 了。我强烈建议每个用 Git 和 Vim 的开发者使用。此系列的第七部分会更多更详细地介绍关于 Unix 的版本控制和历史。
+
+差异
+----
+
+不少用惯了图形化界面 IDE 的程序员把 Vim 当作玩具或文物的一部分原因是它经常只是被看作是在服务器下修改文件用的工具，而非其强大编辑能力的英雄本色。它自带的一些功能对 Unix 环境很友好以至于很多有经验的用户都会被它的强大功能震惊。
