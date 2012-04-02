@@ -9,7 +9,7 @@ Unix 即集成开发环境
 
 以下只是预览版，项目才刚刚开始。
 
-* 初翻2/7
+* 初翻3/7
 * 校对0/7
 
 另外，文中还提及了一些其他相关链接，我也会挑选一些相关度比较大且很有价值的文章翻译一下。
@@ -48,7 +48,7 @@ Unix 即集成开发环境
 贡献者
 ======
 
-本翻译项目的贡献者： `ConanChou <https://github.com/ConanChou>`_\,  `KarenMeu <https://github.com/karenmeu>`_\。
+本翻译项目的贡献者： `ConanChou <https://github.com/ConanChou>`_\。
 
 .. Indices and tables
    ==================
