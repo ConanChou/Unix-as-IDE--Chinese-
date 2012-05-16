@@ -33,8 +33,7 @@ Unix 即集成开发环境
    前言 <introduction>
    文件 <files>
    编辑器 <editing>
-   编译 <compiling>
-   生成 <building>
+   编译 <building>
    错误排除 <debug>
    版本控制 <revisions>
    写在后面的话 <conclude>
