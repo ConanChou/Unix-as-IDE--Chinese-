@@ -40,7 +40,8 @@ Unix 即集成开发环境
 贡献者
 ------
 
-本翻译项目的贡献者： `ConanChou <https://github.com/ConanChou>`_\,  `KarenMeu <https://github.com/karenmeu>`_\。
+本翻译项目的贡献者： `ConanChou <https://github.com/ConanChou>`_\,  
+`xiaojunf <https://github.com/xiaojunf>`_\。
 
 .. Indices and tables
    ==================
