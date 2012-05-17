@@ -3,6 +3,12 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+
+
+=========================
+Unix 即集成开发环境
+=========================
+
 以下只是预览版，项目才刚刚开始。
 
 * 初翻4/6
@@ -11,10 +17,6 @@
                                                                            另外，文中还提及了一些其他相关链接，我也会挑选一些相关度比较大且很有价值的文章翻译一下。
 
 同时，欢迎感兴趣的朋友 `参与项目 <https://github.com/ConanChou/Unix-as-IDE--Chinese->`_\，为中文开源事业出一份力。
-
-=========================
-Unix 即集成开发环境
-=========================
 
 动机
 ----
