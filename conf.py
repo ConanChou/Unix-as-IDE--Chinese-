@@ -41,7 +41,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Unix 即集成开发环境'
-copyright = u'2012, Conan'
+copyright = u'Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
