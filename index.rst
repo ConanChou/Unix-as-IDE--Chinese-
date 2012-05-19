@@ -26,8 +26,7 @@ Unix 即集成开发环境
    前言 <introduction>
    文件 <files>
    编辑器 <editing>
-   编译 <compiling>
-   生成 <building>
+   编译 <building>
    错误排除 <debug>
    版本控制 <revisions>
    写在后面的话 <conclude>
@@ -41,7 +40,8 @@ Unix 即集成开发环境
 贡献者
 ------
 
-本翻译项目的贡献者： `ConanChou <https://github.com/ConanChou>`_\,  `KarenMeu <https://github.com/karenmeu>`_\。
+本翻译项目的贡献者： `ConanChou <https://github.com/ConanChou>`_\,  
+`xiaojunf <https://github.com/xiaojunf>`_\。
 
 .. Indices and tables
    ==================
