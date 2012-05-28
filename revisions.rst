@@ -1,53 +1,49 @@
 ﻿版本控制
 ========
 
-现在，版本控制已经被视为专业软件开发中不可或缺的部分。图形化的集成开发环境例如 Eclipse 和 Visual Studio 已经包含版本控制，并且引入了对工业标准版本控制系统的支持。现代版本控制系统的血统可以追溯到来自于 ``diff`` 和 ``patch`` 等Unix程序的概念。而且依旧有很多人坚持认为最好的版本控制系统是命令行形式的。
+现在，版本控制已经被视为专业软件开发中不可或缺的部分。图形化的集成开发环境例如 Eclipse 和 Visual Studio 已经包含版本控制，并且引入了对工业标准版本控制系统的支持。现代版本控制系统的血统可以追溯到来自于 ``diff`` 和 ``patch`` 等 Unix 程序的概念。而且依旧有很多人坚持认为最好的版本控制系统是命令行形式的。
 
-在这个系列的最后一篇文章中，我会介绍常见开源版本控制系统的发展，从最早的版本控制工具 ``diff`` 和 ``patch`` 和他们的基本概念开始
+在这个系列的最后一篇文章中，我会跟随常见开源版本控制系统发展的脚步，在最早的版本控制中从 ``diff`` 和 ``patch`` 的基本概念开始。
 
+``diff``\、 ``patch`` 和 RCS
+----------------------------
 
-``diff`` 、 ``patch`` 和 RCS
------------------
+版本控制的一个核心概念就是 *unified diff*\，即统一差别格式，一种使用人机皆可理解的表达方式来表现文件中的变化。 ``diff`` 命令最初是由 Douglas McIlroy 在1974年随着第五版Unix发行的，所以它可以称得上是现代系统中仍在使用的最老的命令之一。
 
-版本控制的一个核心概念就是 _unified diff_ ，即统一差别格式，一种使用人际皆可理解的符号和文字来表现文件中变化的格式。 ``diff`` 命令最初是由Douglas McIlroy在1974年随着第五版Unix发行的，所以它可以称得上是现代系统中仍在使用的最老的命令之一。
-
-一个 _unified diff_ ，最常见的协作格式，可以由比较一个文件的两个不同版本来产生，它遵循以下语法：
-
+统一差别格式（ *unified diff* ）是最常见的可协作格式，可以由比较一个文件的两个不同版本来产生，它遵循以下语法： ::
     
     $ diff -u example.{1,2}.c
     --- example.c.1    2012-02-15 20:15:37.000000000 +1300
     +++ example.c.2    2012-02-15 20:15:57.000000000 +1300
     @@ -1,8 +1,9 @@
-     #include <stdio.h>
+    #include <stdio.h>
     +#include <stdlib.h> 
     
-     int main (int argc, char* argv[])
-     {
-         printf("Hello, world!\n");
-    -    return 0;
-    +    return EXIT_SUCCESS;
-     }
+    int main (int argc, char* argv[])
+    {
+        printf("Hello, world!\n");
+    -   return 0;
+    +   return EXIT_SUCCESS;
+    }
 
-在这个例子中，第二个文件比第一个文件中添加了一个头文件，并且其`main()`函数返回使用了标准的`EXIT_SUCCESS`而不是数字'0'。并且注意开头，`diff`还给出了了相应元数据，例如比较的文件名还有文件的最后修改时间。
+在这个例子中，第二个文件比第一个文件中添加了一个头文件，并且其 ``main()`` 函数返回使用了标准的 ``EXIT_SUCCESS`` 而不是数字 ``0``\。并且注意开头， ``diff`` 还给出了了相应元数据，例如比较的文件名还有文件的最后修改时间。
 
-一种原始的版本控制方法即是交换`diff`输出。这些输出被称作_patches_，也即补丁，在开发比例子大一些的软件时程序员们就可以使用 ``patch`` 工具来将补丁应用到自己的代码中。我们可以这样将上面例子的`diff`输出保存成补丁：
-
+在代码量较大的情况下，一种原始的版本控制方法即是交换`diff`输出。这些输出被称作 *patches*\，即补丁，补丁可以用 ``patch`` 来补到原基础代码上。我们可以这样将上面例子的 ``diff`` 输出保存成补丁： ::
     
     $ diff -u example.{1,2}.c > example.patch
 
-然后我们就能把补丁发送给一个尚使用旧版源文件的程序员，然后他就可以自动打上这个补丁，像这样：
+然后我们就可以把补丁发送给一个尚在使用旧版源文件的开发者，然后他就可以像这样自动化打补丁： ::
 
-    
     $ patch example.1.c < example.patch
 
-补丁文件可以包含一个目录内多组`diff`文件比较输出的结果，这样补丁就可以很容易地应用到源代码树上。
+补丁文件可以包含本目录及子目录内多组 ``diff`` 文件比较输出的结果，这样补丁就可以很容易地应用到源代码树上了。
 
-包括使用`diff`输出来跟踪改动在内的各种用来记录文件历史的方法都是相当经常使用的。所以人们开发出了[Source Code Control System（译注：源代码控制系统，暂无中文维基页面，出于可信度考虑不引用其他百科）](http://en.wikipedia.org/wiki/Source_Code_Control_System)和[Revision Control
-System（译注：版本控制系统，同暂无中文维基页面）](http://en.wikipedia.org/wiki/Revision_Control_System) 来实现这一目的，基本上已经取代了`diff`输出。RCS提供了“锁定”文件的功能，防止一个文件在被签出时被其他人修改。这个概念给其他更成熟的版本控制系统铺平了道路。
+使用 ``diff`` 输出来跟踪改动所涉及的操作足够规则用以保存改动历史，
+人们开发出了 `Source Code Control System <http://en.wikipedia.org/wiki/Source_Code_Control_System>`_ 和 `Revision Control
+System <http://en.wikipedia.org/wiki/Revision_Control_System>`_ （译注：源代码控制系统，暂无中文维基页面，出于可信度考虑不引用其他百科） 来实现这一目的，基本上已经取代了 ``diff`` 输出的方法。RCS提供了“锁定（lock）”文件的功能，防止一个文件在被“签出（check out）”时被其他人修改。这个概念给其他更成熟的版本控制系统铺平了道路。
 
-RCS保留了简单易用的优势。将一个文件纳入版本控制，只需要键入`ci <filename>`并且提供一个合适的文件描述：
+RCS保留了简单易用的优势。将一个文件纳入版本控制，只需要键入 ``ci <filename>`` 并且提供一个合适的文件描述： ::
 
-    
     $ ci example.c
     example.c,v  <--  example.c
     enter description, terminated with single '.' or end of file:
@@ -57,8 +53,7 @@ RCS保留了简单易用的优势。将一个文件纳入版本控制，只需�
     initial revision: 1.1
     done
 
-这样就在该文件目录内创建了一个新文件`example.c,v`，用来跟踪文件的修改。修改文件之前，你需要 _签出_ ，然后修改，然后把它 _签入_ 回去：
-
+这样就在该文件目录内创建了一个新文件 ``example.c,v``\，用来跟踪文件的修改。修改文件之前，你需要 *签出（check out）* ，然后修改，最后再把它 *签入（check in）* 回去： ::
     
     $ co -l example.c
     example.c,v  -->  example.c
@@ -73,9 +68,7 @@ RCS保留了简单易用的优势。将一个文件纳入版本控制，只需�
     >> .
     done
 
-你可以使用`rlog`来查看一个项目的历史修改：
-
-
+你可以使用 ``rlog`` 来查看一个项目的修改历史： ::
     
     $ rlog example.c
     
@@ -98,9 +91,8 @@ RCS保留了简单易用的优势。将一个文件纳入版本控制，只需�
     revision 1.1
     date: 2012/02/15 07:36:23;  author: tom;  state: Exp;
     Initial revision
-    =============================================================================
 
-或者使用 `rcsdiff -u` 命令获得两个修订版本之间统一`diff`格式的补丁文件：
+使用 `rcsdiff -u` 命令获得两个修订版本之间统一差别（ ``diff`` ）格式的补丁文件： ::
 
     $ rcsdiff -u -r1.1 -r1.2 ./example.c
     ===================================================================
@@ -111,17 +103,17 @@ RCS保留了简单易用的优势。将一个文件纳入版本控制，只需�
     --- ./example.c	2012/02/15 07:36:23	1.1
     +++ ./example.c	2012/02/15 07:39:16	1.2
     @@ -4,6 +4,7 @@
-     int main (int argc, char* argv[])
-     {
-         printf("Hello, world!\n");
-    +    printf("Extra line!\n");
-         return EXIT_SUCCESS;
-     }
+    int main (int argc, char* argv[])
+    {
+        printf("Hello, world!\n");
+    +   printf("Extra line!\n");
+        return EXIT_SUCCESS;
+    }
 
-这样的用法可能让你觉得简单的补丁文件已经不再是一种版本控制的方法了。实际上它们依然很是很常用于像上面那样的场合，并且对于中心和无中心的版本控制系统来说依然是很重要的。
+这样的用法可能让你觉得简单的补丁文件已经不再是一种版本控制的方法了。实际上它们依然很是很常用于像上面那样的场合，并且对于集中式和分散式的版本控制系统来说依然是很重要的。
 
-CVS和Subversion
-==================
+CVS 和 Subversion
+-----------------
 
 为了解决多个开发者修改同一个代码库的问题， _中心化版本控制系统_ 被开发出来，最早的是[协作版本系统 (CVS)](http://zh.wikipedia.org/wiki/%E5%8D%94%E4%BD%9C%E7%89%88%E6%9C%AC%E7%B3%BB%E7%B5%B1) ，之后出现了稍微高级一些的[Subversion](http://zh.wikipedia.org/wiki/Subversion)。这些系统的核心特性就是任何时刻或者任何版本的代码的公正版本都能从作为代码仓库的 _中心服务器_ 上得到。这样得到的一个代码库被称为 _工作副本_ 。
 
