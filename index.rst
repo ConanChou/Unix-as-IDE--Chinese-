@@ -11,8 +11,8 @@ Unix 即集成开发环境
 
 以下只是预览版，项目才刚刚开始。
 
-* 初翻4/6
-* 校对0/6
+* 初翻7/7
+* 校对3/7
 
 另外，文中还提及了一些其他相关链接，我也会挑选一些相关度比较大且很有价值的文章翻译一下。
 
@@ -38,10 +38,10 @@ Unix 即集成开发环境
    前言 <introduction>
    文件 <files>
    编辑器 <editing>
-   编译 <building>
-   错误排除 <debug>
+   编译 <compiling>
+   创建 <building>
+   调试 <debug>
    版本控制 <revisions>
-   写在后面的话 <conclude>
 
 项目说明
 --------
@@ -52,7 +52,8 @@ Unix 即集成开发环境
 贡献者
 ------
 
-本翻译项目的贡献者： `ConanChou <https://github.com/ConanChou>`_\,  
+本翻译项目的贡献者： `ConanChou <https://github.com/ConanChou>`_\，
+`ccl13 <https://github.com/ccl13>`_\，
 `xiaojunf <https://github.com/xiaojunf>`_\。
 
 .. Indices and tables
