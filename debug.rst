@@ -174,4 +174,5 @@
     ...
     total           152520K
 
- 以上的结果可以显示出在运行的进程使用了哪些库，包括那些在共享内存里的库。最后给出的总计可能会有点令人误解，因为正在运行的进程很有可能加载了共享库，而此进程也不一定是唯一在用此库的进程。当某进程调用共享库的时候， `确定此进程的“真实”内存使用 <http://stackoverflow.com/questions/118307/a-way-to-determine-a-processs-real-memory-usage-i-e-private-dirty-rss>`_ 要比想象中的情况更加复杂。
+
+以上的结果可以显示出在运行的进程使用了哪些库，包括那些在共享内存里的库。最后给出的总计可能会有点令人误解，因为正在运行的进程很有可能加载了共享库，而此进程也不一定是唯一在用此库的进程。当某进程调用共享库的时候， `确定此进程的“真实”内存使用 <http://stackoverflow.com/questions/118307/a-way-to-determine-a-processs-real-memory-usage-i-e-private-dirty-rss>`_ 要比想象中的情况更加复杂。
