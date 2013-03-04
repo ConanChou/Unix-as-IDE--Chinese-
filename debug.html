@@ -1,0 +1,243 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>调试 &mdash; Unix 即集成开发环境 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Unix 即集成开发环境 1.0 documentation" href="index.html" />
+    <link rel="next" title="版本控制" href="revisions.html" />
+    <link rel="prev" title="编译" href="building.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总目录"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="revisions.html" title="版本控制"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="building.html" title="编译"
+             accesskey="P">上一页</a> |</li>
+        <li><a href="index.html">Unix 即集成开发环境 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="id1">
+<h1>调试<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>程序在运行时有意料之外的行为时，Linux 提供了广泛而多样的命令行工具来诊断问题。用集成开发环境工具设断点来在程序运行时检查程序状态的朋友应该会对 <tt class="docutils literal"><span class="pre">gdb</span></tt>（GNU debugger），以及其相关的较没名气的 Perl 调试程序比较熟悉。其他还有一些工具则更专注于观察程序和系统的交互以及系统资源使用的细节。</p>
+<div class="section" id="gdb">
+<h2>用 <tt class="docutils literal"><span class="pre">gdb</span></tt> 做调试<a class="headerlink" href="#gdb" title="永久链接至标题">¶</a></h2>
+<p>你可以用类似 Eclipse 和 Visual Studio 的调试方式去使用 <tt class="docutils literal"><span class="pre">gdb</span></tt>。如果你在调试一个你刚刚编译好的程序，编译时加个调试标签是有道理的。你只需要在用 <tt class="docutils literal"><span class="pre">gcc</span></tt> 编译的时候加上个 <tt class="docutils literal"><span class="pre">-g</span></tt> 的选项。如果代码写得有问题，你也可以加上 <tt class="docutils literal"><span class="pre">-Wall</span></tt>，这样所有的错误信息都会显示：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>gcc -g -Wall example.c -o example
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">gdb</span></tt> 的经典用法就是在命令行下运行 C 或 C++ 编译的程序，从而在其运行直至崩溃时观察程序的状态。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>gdb example
+...
+Reading symbols from /home/tom/example...done.
+<span class="o">(</span>gdb<span class="o">)</span>
+</pre></div>
+</div>
+<p>在 <tt class="docutils literal"><span class="pre">(gdb)</span></tt> 交互命令下，你可以输入 <tt class="docutils literal"><span class="pre">run</span></tt> 来运行程序，它会反馈给你更多有关导致错误的细节信息，比如下例的内存访问越界错误、出错的源码文件以及出错的代码行号。如果你像上面提到的那样在编译时加入调试符并观察其运行，排错任务会变得非常简单。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="o">(</span>gdb<span class="o">)</span> run
+Starting program: /home/tom/gdb/example
+
+Program received signal SIGSEGV, Segmentation fault.
+0x000000000040072e in main <span class="o">()</span> at example.c:43
+43     <span class="nb">printf</span><span class="o">(</span><span class="s2">&quot;%d\n&quot;</span>, *segfault<span class="o">)</span>;
+</pre></div>
+</div>
+<p>在错误终止程序之后，你可以在 <tt class="docutils literal"><span class="pre">(gdb)</span></tt> 命令行下输入 <tt class="docutils literal"><span class="pre">backtrace</span></tt> 查看刚刚是哪一个功能模块运行了，传进该功能模块的参数也可能跟程序的崩溃有关。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="o">(</span>gdb<span class="o">)</span> backtrace
+<span class="c">#0  0x000000000040072e in main () at example.c:43</span>
+</pre></div>
+</div>
+<p>你也可以用 <tt class="docutils literal"><span class="pre">break</span></tt> 来为 <tt class="docutils literal"><span class="pre">(gdb)</span></tt> 设置断点，这样程序运行到相应行号或某模块调用的时候就会暂停：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break </span>42
+Breakpoint 1 at 0x400722: file example.c, line 42.
+<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break </span>malloc
+Breakpoint 1 at 0x4004c0
+<span class="o">(</span>gdb<span class="o">)</span> run
+Starting program: /home/tom/gdb/example
+
+Breakpoint 1, 0x00007ffff7df2310 in malloc <span class="o">()</span> from /lib64/ld-linux-x86-64.so.2
+</pre></div>
+</div>
+<p>其后，用 <tt class="docutils literal"><span class="pre">step</span></tt> 来单步调试之后的代码会非常有帮助。你可以像使用其他 <tt class="docutils literal"><span class="pre">(gdb)</span></tt> 命令一样，按回车键重复单步调试：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="o">(</span>gdb<span class="o">)</span> step
+Single stepping <span class="k">until </span><span class="nb">exit </span>from <span class="k">function </span>_start,
+which has no line number information.
+0x00007ffff7a74db0 in __libc_start_main <span class="o">()</span> from /lib/x86_64-linux-gnu/libc.so.6
+</pre></div>
+</div>
+<p>你甚至可以将 <tt class="docutils literal"><span class="pre">gdb</span></tt> 附到一个正在运行的进程上，只需要找到该进程的 ID 并将此 ID 传入 <tt class="docutils literal"><span class="pre">gdb</span></tt>：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pgrep example
+1524
+<span class="nv">$ </span>gdb -p 1524
+</pre></div>
+</div>
+<p>这样做对 <a class="reference external" href="http://stackoverflow.com/questions/593724/redirect-stderr-stdout-of-a-process-after-its-been-started-using-command-lin">重定向某些耗时长的任务的输出流</a> 很有帮助。</p>
+</div>
+<div class="section" id="valgrind">
+<h2>用 <tt class="docutils literal"><span class="pre">valgrind</span></tt> 调试<a class="headerlink" href="#valgrind" title="永久链接至标题">¶</a></h2>
+<p>较新的 <a class="reference external" href="http://valgrind.org/">valgrind</a> 可以用类似的方法来用作调试工具。它有好多种检测和调试的方式，但是有一种是最为有用的，即 Memcheck 工具，这个工具可以用来侦测常见的类似缓冲区溢出的内存错误：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>valgrind --leak-check<span class="o">=</span>yes ./example
+<span class="o">==</span><span class="nv">29557</span><span class="o">==</span> Memcheck, a memory error <span class="nv">detector</span>
+<span class="o">==</span><span class="nv">29557</span><span class="o">==</span> Copyright <span class="o">(</span>C<span class="o">)</span> 2002-2011, and GNU GPL<span class="s1">&#39;d, by Julian Seward et al.</span>
+<span class="s1">==29557== Using Valgrind-3.7.0 and LibVEX; rerun with -h for copyright info</span>
+<span class="s1">==29557== Command: ./example</span>
+<span class="s1">==29557==</span>
+<span class="s1">==29557== Invalid read of size 1</span>
+<span class="s1">==29557==    at 0x40072E: main (example.c:43)</span>
+<span class="s1">==29557==  Address 0x0 is not stack&#39;</span>d, malloc<span class="s1">&#39;d or (recently) free&#39;</span><span class="nv">d</span>
+<span class="o">==</span><span class="nv">29557</span><span class="o">==</span>
+...
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">gdb</span></tt> 和 <tt class="docutils literal"><span class="pre">valgrind</span></tt> 可以 <a class="reference external" href="http://valgrind.org/docs/manual/manual-core-adv.html#manual-core-adv.gdbserver">组合使用</a> 从而更加全面的观察程序运行。 Zed Shaw 写的 <a class="reference external" href="http://c.learncodethehardway.org/book/">《笨办法学 C 语言》</a> 中就有个对 <tt class="docutils literal"><span class="pre">valgrind</span></tt> 非常好的介绍，有关如何用一些入门用法来调试某故意弄错的程序。</p>
+</div>
+<div class="section" id="ltrace">
+<h2>利用 <tt class="docutils literal"><span class="pre">ltrace</span></tt> 追踪系统和库的调用<a class="headerlink" href="#ltrace" title="永久链接至标题">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">strace</span></tt> 和 <tt class="docutils literal"><span class="pre">ltrace</span></tt> 是为查看某程序的系统和库调用情况而设计的，追踪结果可以被显示在屏幕上也可以被写入到文件。</p>
+<p>将你想监视的程序作为参数传进 <tt class="docutils literal"><span class="pre">ltrace</span></tt> 就可以开始监视了。它会将程序从头到尾调用的所有的系统和库都列出来。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ltrace ./example
+__libc_start_main<span class="o">(</span>0x4006ad, 1, 0x7fff9d7e5838, 0x400770, 0x400760
+srand<span class="o">(</span>4, 0x7fff9d7e5838, 0x7fff9d7e5848, 0, 0x7ff3aebde320<span class="o">)</span> <span class="o">=</span> 0
+malloc<span class="o">(</span>24<span class="o">)</span>                                                  <span class="o">=</span> 0x01070010
+rand<span class="o">(</span>0, 0x1070020, 0, 0x1070000, 0x7ff3aebdee60<span class="o">)</span>            <span class="o">=</span> 0x754e7ddd
+malloc<span class="o">(</span>24<span class="o">)</span>                                                  <span class="o">=</span> 0x01070030
+rand<span class="o">(</span>0x7ff3aebdee60, 24, 0, 0x1070020, 0x7ff3aebdeec8<span class="o">)</span>      <span class="o">=</span> 0x11265233
+malloc<span class="o">(</span>24<span class="o">)</span>                                                  <span class="o">=</span> 0x01070050
+rand<span class="o">(</span>0x7ff3aebdee60, 24, 0, 0x1070040, 0x7ff3aebdeec8<span class="o">)</span>      <span class="o">=</span> 0x18799942
+malloc<span class="o">(</span>24<span class="o">)</span>                                                  <span class="o">=</span> 0x01070070
+rand<span class="o">(</span>0x7ff3aebdee60, 24, 0, 0x1070060, 0x7ff3aebdeec8<span class="o">)</span>      <span class="o">=</span> 0x214a541e
+malloc<span class="o">(</span>24<span class="o">)</span>                                                  <span class="o">=</span> 0x01070090
+rand<span class="o">(</span>0x7ff3aebdee60, 24, 0, 0x1070080, 0x7ff3aebdeec8<span class="o">)</span>      <span class="o">=</span> 0x1b6d90f3
+malloc<span class="o">(</span>24<span class="o">)</span>                                                  <span class="o">=</span> 0x010700b0
+rand<span class="o">(</span>0x7ff3aebdee60, 24, 0, 0x10700a0, 0x7ff3aebdeec8<span class="o">)</span>      <span class="o">=</span> 0x2e19c419
+malloc<span class="o">(</span>24<span class="o">)</span>                                                  <span class="o">=</span> 0x010700d0
+rand<span class="o">(</span>0x7ff3aebdee60, 24, 0, 0x10700c0, 0x7ff3aebdeec8<span class="o">)</span>      <span class="o">=</span> 0x35bc1a99
+malloc<span class="o">(</span>24<span class="o">)</span>                                                  <span class="o">=</span> 0x010700f0
+rand<span class="o">(</span>0x7ff3aebdee60, 24, 0, 0x10700e0, 0x7ff3aebdeec8<span class="o">)</span>      <span class="o">=</span> 0x53b8d61b
+malloc<span class="o">(</span>24<span class="o">)</span>                                                  <span class="o">=</span> 0x01070110
+rand<span class="o">(</span>0x7ff3aebdee60, 24, 0, 0x1070100, 0x7ff3aebdeec8<span class="o">)</span>      <span class="o">=</span> 0x18e0f924
+malloc<span class="o">(</span>24<span class="o">)</span>                                                  <span class="o">=</span> 0x01070130
+rand<span class="o">(</span>0x7ff3aebdee60, 24, 0, 0x1070120, 0x7ff3aebdeec8<span class="o">)</span>      <span class="o">=</span> 0x27a51979
+--- SIGSEGV <span class="o">(</span>Segmentation fault<span class="o">)</span> ---
++++ killed by SIGSEGV +++
+</pre></div>
+</div>
+<p>你同样也可以将其附到某已运行的进程上：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pgrep example
+5138
+<span class="nv">$ </span>ltrace -p 5138
+</pre></div>
+</div>
+<p>一般情况，监视结果会超过一屏，所以用 <tt class="docutils literal"><span class="pre">-o</span></tt> 来设定一个输出文件会很有用，这样结果就全被记录到该文件里了：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ltrace -o example.ltrace ./example
+</pre></div>
+</div>
+<p>然后在用类似于 Vim 的工具打开 trace 文件， <tt class="docutils literal"><span class="pre">ltrace</span></tt> 文件会被语法高亮：</p>
+<p>我发觉在调试误连接或在 <tt class="docutils literal"><span class="pre">chroot</span></tt> 环境下缺某些资源时候用 <tt class="docutils literal"><span class="pre">ltrace</span></tt> 特别有用，因为输出信息显示了它在动态连接时搜索库文件、打开 <tt class="docutils literal"><span class="pre">/etc</span></tt> 下的配置文件、以及使用像 <tt class="docutils literal"><span class="pre">/dev/random</span></tt> 或 <tt class="docutils literal"><span class="pre">/dev/zero</span></tt> 这样的设备。</p>
+</div>
+<div class="section" id="lsof">
+<h2>利用 <tt class="docutils literal"><span class="pre">lsof</span></tt> 监视打开的文件<a class="headerlink" href="#lsof" title="永久链接至标题">¶</a></h2>
+<p>如果你想查看一个正在运行的进程打开了哪些设备、文件或流，你可以使用 <tt class="docutils literal"><span class="pre">lsof</span></tt>：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pgrep example
+5051
+<span class="nv">$ </span>lsof -p 5051
+</pre></div>
+</div>
+<p>举个例子，我家里服务器里的 <tt class="docutils literal"><span class="pre">apache2</span></tt> 进程的开始几行是这样的：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># lsof -p 30779</span>
+COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF    NODE NAME
+apache2 30779 root  cwd    DIR    8,1     4096       2 /
+apache2 30779 root  rtd    DIR    8,1     4096       2 /
+apache2 30779 root  txt    REG    8,1   485384  990111 /usr/lib/apache2/mpm-prefork/apache2
+apache2 30779 root  DEL    REG    8,1          1087891 /lib/x86_64-linux-gnu/libgcc_s.so.1
+apache2 30779 root  mem    REG    8,1    35216 1079715 /usr/lib/php5/20090626/pdo_mysql.so
+...
+</pre></div>
+</div>
+<p>有趣的是，还有另一种办法可以办到这个，就是检查动态目录 <tt class="docutils literal"><span class="pre">/proc</span></tt> 里的相应记录：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># ls -l /proc/30779/fd</span>
+</pre></div>
+</div>
+<p>这在遇到文件锁的令人困惑的情况或鉴定某进程是否保有不需要用到的文件的时候非常有用。</p>
+</div>
+<div class="section" id="pmap">
+<h2>用 <tt class="docutils literal"><span class="pre">pmap</span></tt> 查看内存分配<a class="headerlink" href="#pmap" title="永久链接至标题">¶</a></h2>
+<p>最后一个调试小技巧，你可以用 <tt class="docutils literal"><span class="pre">pmap</span></tt> 查看某进程的内存分配情况：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># pmap 30779</span>
+30779:   /usr/sbin/apache2 -k start
+00007fdb3883e000     84K r-x--  /lib/x86_64-linux-gnu/libgcc_s.so.1 <span class="o">(</span>deleted<span class="o">)</span>
+00007fdb38853000   2048K -----  /lib/x86_64-linux-gnu/libgcc_s.so.1 <span class="o">(</span>deleted<span class="o">)</span>
+00007fdb38a53000      4K rw---  /lib/x86_64-linux-gnu/libgcc_s.so.1 <span class="o">(</span>deleted<span class="o">)</span>
+00007fdb38a54000      4K -----    <span class="o">[</span> anon <span class="o">]</span>
+00007fdb38a55000   8192K rw---    <span class="o">[</span> anon <span class="o">]</span>
+00007fdb392e5000     28K r-x--  /usr/lib/php5/20090626/pdo_mysql.so
+00007fdb392ec000   2048K -----  /usr/lib/php5/20090626/pdo_mysql.so
+00007fdb394ec000      4K r----  /usr/lib/php5/20090626/pdo_mysql.so
+00007fdb394ed000      4K rw---  /usr/lib/php5/20090626/pdo_mysql.so
+...
+total           152520K
+</pre></div>
+</div>
+<p>以上的结果可以显示出在运行的进程使用了哪些库，包括那些在共享内存里的库。最后给出的总计可能会有点令人误解，因为正在运行的进程很有可能加载了共享库，而此进程也不一定是唯一在用此库的进程。当某进程调用共享库的时候， <a class="reference external" href="http://stackoverflow.com/questions/118307/a-way-to-determine-a-processs-real-memory-usage-i-e-private-dirty-rss">确定此进程的“真实”内存使用</a> 要比想象中的情况更加复杂。</p>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总目录"
+             >索引</a></li>
+        <li class="right" >
+          <a href="revisions.html" title="版本控制"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="building.html" title="编译"
+             >上一页</a> |</li>
+        <li><a href="index.html">Unix 即集成开发环境 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; 版权所有 Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+      使用 <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

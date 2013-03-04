@@ -1,0 +1,169 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Unix 即集成开发环境 &mdash; Unix 即集成开发环境 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Unix 即集成开发环境 1.0 documentation" href="#" />
+    <link rel="next" title="前言" href="introduction.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总目录"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="introduction.html" title="前言"
+             accesskey="N">下一页</a> |</li>
+        <li><a href="#">Unix 即集成开发环境 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="unix">
+<h1>Unix 即集成开发环境<a class="headerlink" href="#unix" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2>动机<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>前阵子，我在 <a class="reference external" href="http://news.ycombinator.com/">Hacker News</a> 上看到Tom Ryder的一个系列文章， <a class="reference external" href="http://blog.sanctum.geek.nz/series/unix-as-ide/">谈关于Unix和IDE（集成开发环境）的</a>。其实类似的文章在HN上经常看到，只是由于我是开源和Vim狂热者才会每次都点开看看——每次都能学到新的东西。</p>
+<p>那一阵子也正好好几次跟同学和朋友说到有关的话题。他们都是 IDE 控，这不是什么不好的事情，我自己在一些时候也会选择 IDE。但是他们普遍对使用 Unix 和类似 Vim 的编辑工具没有正确的认识，以至于我的观点得不到应有程度的共鸣或共识。而我恰好看到了这个系列文章，觉得这是一个非常不错的入门系列。而且我在很多观点上都认同作者，所以本打算写一篇博文谈谈来着，现在索性来翻译这个系列文章好了。（之所以要翻译而不是直接转载是因为我发现对于 Unix 以及相关开发工具的使用的知识缺乏在中国存在度很高，语言可以是原因之一，所以这个系列不是为我的朋友和同学而翻译，更大程度上是为了普及知识。）</p>
+<p>如果您对此话题很感兴趣，不妨也读一读 <a class="reference external" href="http://www.iu.hio.no/~mark/unix/unix_toc.html">The unix programming environment</a>。如果你现在还在大学里，也不妨上一些有关的课程，一定会对你的职业生涯有很大的帮助。</p>
+<p><strong>最后声明</strong> ，我并不想鼓吹使用某种开发工具或使用某种工作流程，和此系列作者一样，只普及知识。如果这个系列的文章颠覆了你的世界观，你因此变成了 Unix 粉，我们概不负责。</p>
+</div>
+<div class="section" id="id2">
+<h2>目录<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">前言</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#unix-ide">Unix 怎么就是个IDE了？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#id2">正确的想法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#id3">有关此系列文章</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#id4">别误解我</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="files.html">文件</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="files.html#id2">列举文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="files.html#id3">查找文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="files.html#id4">搜索文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="files.html#id5">文件元数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="files.html#id6">匹配文件</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="editing.html">编辑器</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#id2">文件类型侦测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#id3">句法高亮</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#id6">行号</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#id7">标签文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#id9">调用外部程序</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="editing.html#lint">Lint 程序和句法检查器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="editing.html#id10">从其他命令读取输出</a></li>
+<li class="toctree-l3"><a class="reference internal" href="editing.html#id11">用其他命令过滤输出</a></li>
+<li class="toctree-l3"><a class="reference internal" href="editing.html#id12">自带的其他选择</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#id13">对比文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#id14">版本控制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#id15">差异</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="compiling.html">编译</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="compiling.html#gcc">GCC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compiling.html#id3">目标码的编译和汇编</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compiling.html#id4">预处理器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compiling.html#id5">目标码的连接</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compiling.html#id6">编译、装配和链接</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compiling.html#id7">包含和连接</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compiling.html#id8">编译计划</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compiling.html#id9">更冗长的错误查看</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compiling.html#id10">编译时间剖析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compiling.html#id11">优化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compiling.html#id12">解释器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compiling.html#id13">内联</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="building.html">创建</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="building.html#makefile">剖析 <tt class="docutils literal"><span class="pre">Makefile</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="building.html#make"><tt class="docutils literal"><span class="pre">make</span></tt> 更为广泛的使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building.html#id2">创建 <tt class="docutils literal"><span class="pre">Makefile</span></tt> 的工具</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="debug.html">调试</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="debug.html#gdb">用 <tt class="docutils literal"><span class="pre">gdb</span></tt> 做调试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html#valgrind">用 <tt class="docutils literal"><span class="pre">valgrind</span></tt> 调试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html#ltrace">利用 <tt class="docutils literal"><span class="pre">ltrace</span></tt> 追踪系统和库的调用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html#lsof">利用 <tt class="docutils literal"><span class="pre">lsof</span></tt> 监视打开的文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html#pmap">用 <tt class="docutils literal"><span class="pre">pmap</span></tt> 查看内存分配</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="revisions.html">版本控制</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="revisions.html#diff-patch-rcs"><tt class="docutils literal"><span class="pre">diff</span></tt>、 <tt class="docutils literal"><span class="pre">patch</span></tt> 和 RCS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="revisions.html#cvs-subversion">CVS 和 Subversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="revisions.html#git-mercurial">Git 和 Mercurial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="revisions.html#id3">结语</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>项目说明<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>使用的是 <a class="reference external" href="http://sphinx.pocoo.org/">sphinx</a> 文档生成器。</li>
+<li>项目主页 <a class="reference external" href="https://github.com/ConanChou/Unix-as-IDE--Chinese-">Unix as IDE (Chinese)</a>。</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>贡献者<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>本翻译项目的贡献者： <a class="reference external" href="https://github.com/ConanChou">ConanChou</a>，
+<a class="reference external" href="https://github.com/ccl13">ccl13</a>。</p>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总目录"
+             >索引</a></li>
+        <li class="right" >
+          <a href="introduction.html" title="前言"
+             >下一页</a> |</li>
+        <li><a href="#">Unix 即集成开发环境 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; 版权所有 Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+      使用 <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
