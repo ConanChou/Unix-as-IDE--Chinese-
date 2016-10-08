@@ -1,20 +1,19 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_CN">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>编译 &mdash; Unix 即集成开发环境 1.0 documentation</title>
+    <title>编译 &#8212; Unix 即集成开发环境 1.0 文档</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -25,12 +24,14 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
-    <link rel="top" title="Unix 即集成开发环境 1.0 documentation" href="index.html" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="top" title="Unix 即集成开发环境 1.0 文档" href="index.html" />
     <link rel="next" title="编译" href="building.html" />
     <link rel="prev" title="编辑器" href="editing.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>导航</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -42,46 +43,46 @@
         <li class="right" >
           <a href="editing.html" title="编辑器"
              accesskey="P">上一页</a> |</li>
-        <li><a href="index.html">Unix 即集成开发环境 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Unix 即集成开发环境 1.0 文档</a> &#187;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="id1">
 <h1>编译<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<p>Unix 平台下有很多编译和解释代码的工具，它们用法各异。然而，但是概念上很多步骤是一样的。这里我将讨论用 GNU 编译器集里的 <tt class="docutils literal"><span class="pre">gcc</span></tt> 编译 C，并简要介绍用 <tt class="docutils literal"><span class="pre">perl</span></tt> 作为解释器。</p>
+<p>Unix 平台下有很多编译和解释代码的工具，它们用法各异。然而，但是概念上很多步骤是一样的。这里我将讨论用 GNU 编译器集里的 <code class="docutils literal"><span class="pre">gcc</span></code> 编译 C，并简要介绍用 <code class="docutils literal"><span class="pre">perl</span></code> 作为解释器。</p>
 <div class="section" id="gcc">
 <h2>GCC<a class="headerlink" href="#gcc" title="永久链接至标题">¶</a></h2>
 <p><a class="reference external" href="http://gcc.gnu.org/">GCC</a> 是个非常成熟的 GPL 许可的编译器集。也许大家知道得最多的还是用它来编译 C 和 C++ 程序。它的免费以及它广泛的装载在 Unix 类似的系统上（例如 Linux 和 BSD）,使得它如此长久地流行。当然，现在还有一些更加现代化的使用 <a class="reference external" href="http://llvm.org/">LLVM</a> 架构的替代编译器，比如 <a class="reference external" href="http://clang.llvm.org/">Clang</a>。</p>
 <p>最好别把 GNU 编译器集的前端二进制码当作是一组各自为政的完整的编译器，而是把它当作将一组离散的工具串联起来的驱动器，用以执行分析、编译和链接等步骤。这就意味着你既可以把 GCC 当作相对简单的命令行来把 C 源文件直接编译到可执行二进制，你也可以用它来检查和调试编译过程中的每个小步骤。</p>
-<p>在这里我不会去讨论 <tt class="docutils literal"><span class="pre">make</span></tt> 文件，虽说对于任何多于一个文件的 C 项目必不可少。我们会在下一章有关创建和自动化工具的文章中讨论。</p>
+<p>在这里我不会去讨论 <code class="docutils literal"><span class="pre">make</span></code> 文件，虽说对于任何多于一个文件的 C 项目必不可少。我们会在下一章有关创建和自动化工具的文章中讨论。</p>
 </div>
 <div class="section" id="id3">
 <h2>目标码的编译和汇编<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <p>你可以如此将 C 源码编译到目标码：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>gcc -c example.c -o example.o
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ gcc -c example.c -o example.o
 </pre></div>
 </div>
-<p>假设这是个 C 程序代码没有问题，这将会在当前目录有下生成一个未链接的二进制目标文件 <tt class="docutils literal"><span class="pre">example.o</span></tt>，或者它会告诉你编译为何失败。你可以用 <tt class="docutils literal"><span class="pre">objdump</span></tt> 来检查它的汇编码0：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>objdump -D example.o
+<p>假设这是个 C 程序代码没有问题，这将会在当前目录有下生成一个未链接的二进制目标文件 <code class="docutils literal"><span class="pre">example.o</span></code>，或者它会告诉你编译为何失败。你可以用 <code class="docutils literal"><span class="pre">objdump</span></code> 来检查它的汇编码0：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ objdump -D example.o
 </pre></div>
 </div>
-<p>此外，你还可以用加 <tt class="docutils literal"><span class="pre">-S</span></tt> 参数来使得 <tt class="docutils literal"><span class="pre">gcc</span></tt> 输出适当的汇编码：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>gcc -c -S example.c -o example.s
+<p>此外，你还可以用加 <code class="docutils literal"><span class="pre">-S</span></code> 参数来使得 <code class="docutils literal"><span class="pre">gcc</span></code> 输出适当的汇编码：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ gcc -c -S example.c -o example.s
 </pre></div>
 </div>
 <p>当汇编码和程序源代码被一起打印出来的时候可以是很有用的，或者至少是很有趣的：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>gcc -c -g -Wa,-a,-ad example.c &gt; example.lst
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ gcc -c -g -Wa,-a,-ad example.c &gt; example.lst
 </pre></div>
 </div>
 </div>
 <div class="section" id="id4">
 <h2>预处理器<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
-<p>C 预处理器 <tt class="docutils literal"><span class="pre">cpp</span></tt> 是用来将头文件和宏定义加入到代码里的。一般来说它是 <tt class="docutils literal"><span class="pre">gcc</span></tt> 的一部分，但你也可以来直接调用它来查看它生成的 C 代码：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>cpp example.c
+<p>C 预处理器 <code class="docutils literal"><span class="pre">cpp</span></code> 是用来将头文件和宏定义加入到代码里的。一般来说它是 <code class="docutils literal"><span class="pre">gcc</span></code> 的一部分，但你也可以来直接调用它来查看它生成的 C 代码：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ cpp example.c
 </pre></div>
 </div>
 <p>这将会打印出将要被编译的完整版代码，即包含了头文件并已实施了相关的宏。</p>
@@ -89,74 +90,74 @@
 <div class="section" id="id5">
 <h2>目标码的连接<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
 <p>一个或多个目标码可以像这样被连接成适当的二进制文件：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>gcc example.o -o example
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ gcc example.o -o example
 </pre></div>
 </div>
-<p>在这个例子里，GCC 只是抽象化呼叫了 GNU 连接器 <tt class="docutils literal"><span class="pre">ld</span></tt>。以上的命令生成了一个可执行二进制文件 <tt class="docutils literal"><span class="pre">example</span></tt>。</p>
+<p>在这个例子里，GCC 只是抽象化呼叫了 GNU 连接器 <code class="docutils literal"><span class="pre">ld</span></code>。以上的命令生成了一个可执行二进制文件 <code class="docutils literal"><span class="pre">example</span></code>。</p>
 </div>
 <div class="section" id="id6">
 <h2>编译、装配和链接<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
 <p>以上所有的步骤其实可以一步做完：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>gcc example.c -o example
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ gcc example.c -o example
 </pre></div>
 </div>
 <p>这看起来简单了一些。但是，单个地编译目标码其实在实际的效率上有其过人之处，因为当重新编译的时候有些不必要的代码就不用再编译了。至于这一点，我会在下一篇文章中讨论。</p>
 </div>
 <div class="section" id="id7">
 <h2>包含和连接<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
-<p>C 文件和头文件可以被显式地包含在编译命令里，即用参数 <tt class="docutils literal"><span class="pre">-I</span></tt>：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>gcc -I/usr/include/somelib.h example.c -o example
+<p>C 文件和头文件可以被显式地包含在编译命令里，即用参数 <code class="docutils literal"><span class="pre">-I</span></code>：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ gcc -I/usr/include/somelib.h example.c -o example
 </pre></div>
 </div>
-<p>类似的，如果代码需要被动态地连接到一个已编译好的系统库，这些库通常在像 <tt class="docutils literal"><span class="pre">/lib</span></tt> 或 <tt class="docutils literal"><span class="pre">/usr/lib</span></tt> 的共有位置。假设是 <tt class="docutils literal"><span class="pre">ncurses</span></tt>，我们可以在命令里包含一个 <tt class="docutils literal"><span class="pre">-l</span></tt> 参数：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>gcc -lncurses example.c -o example
+<p>类似的，如果代码需要被动态地连接到一个已编译好的系统库，这些库通常在像 <code class="docutils literal"><span class="pre">/lib</span></code> 或 <code class="docutils literal"><span class="pre">/usr/lib</span></code> 的共有位置。假设是 <code class="docutils literal"><span class="pre">ncurses</span></code>，我们可以在命令里包含一个 <code class="docutils literal"><span class="pre">-l</span></code> 参数：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ gcc -lncurses example.c -o example
 </pre></div>
 </div>
 <p>如果在你的编译中有很多必要的包含和连接，将其放进环境变量是很明智的：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">export </span><span class="nv">CFLAGS</span><span class="o">=</span>-I/usr/include/somelib.h
-<span class="nv">$ </span><span class="nb">export </span><span class="nv">CLIBS</span><span class="o">=</span>-lncurses
-<span class="nv">$ </span>gcc <span class="nv">$CFLAGS</span> <span class="nv">$CLIBS</span> example.c -o example
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">CFLAGS</span><span class="o">=</span>-I/usr/include/somelib.h
+$ <span class="nb">export</span> <span class="nv">CLIBS</span><span class="o">=</span>-lncurses
+$ gcc <span class="nv">$CFLAGS</span> <span class="nv">$CLIBS</span> example.c -o example
 </pre></div>
 </div>
-<p>这种常见的步骤也是 <tt class="docutils literal"><span class="pre">Makefile</span></tt> 可以帮你省略的东西之一。</p>
+<p>这种常见的步骤也是 <code class="docutils literal"><span class="pre">Makefile</span></code> 可以帮你省略的东西之一。</p>
 </div>
 <div class="section" id="id8">
 <h2>编译计划<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
-<p>为了查看 <tt class="docutils literal"><span class="pre">gcc</span></tt> 都用那些命令干了些什么，你可以在编译命令里加上 <tt class="docutils literal"><span class="pre">-v</span></tt> 开关。这样它就会把它的编译计划从标准错误流里打印出来：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>gcc -v -c example.c -o example.o
+<p>为了查看 <code class="docutils literal"><span class="pre">gcc</span></code> 都用那些命令干了些什么，你可以在编译命令里加上 <code class="docutils literal"><span class="pre">-v</span></code> 开关。这样它就会把它的编译计划从标准错误流里打印出来：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ gcc -v -c example.c -o example.o
 </pre></div>
 </div>
-<p>如果你不想要编译器真正地去生产目标文件或者已连接的二进制文件。有时用 <tt class="docutils literal"><span class="pre">-###</span></tt> 更好（译者按：这个方法貌似在zsh下不能使用）：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>gcc -### -c example.c -o example.o
+<p>如果你不想要编译器真正地去生产目标文件或者已连接的二进制文件。有时用 <code class="docutils literal"><span class="pre">-###</span></code> 更好（译者按：这个方法貌似在zsh下不能使用）：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ gcc -### -c example.c -o example.o
 </pre></div>
 </div>
-<p>这有助于让你看到哪些步骤 <tt class="docutils literal"><span class="pre">gcc</span></tt> 帮你简化了。但同时，在一些特殊的情况下，你也可以用它来发现哪些是你不希望编译器帮你做的步骤却在编译时被执行了。</p>
+<p>这有助于让你看到哪些步骤 <code class="docutils literal"><span class="pre">gcc</span></code> 帮你简化了。但同时，在一些特殊的情况下，你也可以用它来发现哪些是你不希望编译器帮你做的步骤却在编译时被执行了。</p>
 </div>
 <div class="section" id="id9">
 <h2>更冗长的错误查看<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
-<p>在用 <tt class="docutils literal"><span class="pre">gcc</span></tt> 编译的时候加上 <tt class="docutils literal"><span class="pre">-Wall</span></tt> 和／或 <tt class="docutils literal"><span class="pre">-pedantic</span></tt> 来让它输出不一定会产生错误的警告：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>gcc -Wall -pedantic -c example.c -o example.o
+<p>在用 <code class="docutils literal"><span class="pre">gcc</span></code> 编译的时候加上 <code class="docutils literal"><span class="pre">-Wall</span></code> 和／或 <code class="docutils literal"><span class="pre">-pedantic</span></code> 来让它输出不一定会产生错误的警告：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ gcc -Wall -pedantic -c example.c -o example.o
 </pre></div>
 </div>
-<p>将它放进你的 <tt class="docutils literal"><span class="pre">Makefile</span></tt> 或 Vim 的 <a class="reference external" href="http://vim.wikia.com/wiki/Errorformat_and_makeprg">makeprg</a> 声明是个好主意，如前一篇文章所讨论的那样，它们在快速修正（quickfix）窗口里的输出效果很好。这种高强度的错误警告往往会使你写出可读性更强、兼容性更好、更少错误的代码。</p>
+<p>将它放进你的 <code class="docutils literal"><span class="pre">Makefile</span></code> 或 Vim 的 <a class="reference external" href="http://vim.wikia.com/wiki/Errorformat_and_makeprg">makeprg</a> 声明是个好主意，如前一篇文章所讨论的那样，它们在快速修正（quickfix）窗口里的输出效果很好。这种高强度的错误警告往往会使你写出可读性更强、兼容性更好、更少错误的代码。</p>
 </div>
 <div class="section" id="id10">
 <h2>编译时间剖析<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
-<p>你可以将 <tt class="docutils literal"><span class="pre">-time</span></tt> 标记放进 <tt class="docutils literal"><span class="pre">gcc</span></tt>，让它输出编译每一步所用的时间：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>gcc -time -c example.c -o example.o
+<p>你可以将 <code class="docutils literal"><span class="pre">-time</span></code> 标记放进 <code class="docutils literal"><span class="pre">gcc</span></code>，让它输出编译每一步所用的时间：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ gcc -time -c example.c -o example.o
 </pre></div>
 </div>
 </div>
 <div class="section" id="id11">
 <h2>优化<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
-<p>传如一般的优化选项给 <tt class="docutils literal"><span class="pre">gcc</span></tt> 就可以让它为你构建更加搞笑的目标文件和连接好的二进制文件，当然优化需要花更长的编译时间。我发现 <tt class="docutils literal"><span class="pre">-O2</span></tt> 对于产品来说是个不错的适中选择：</p>
+<p>传如一般的优化选项给 <code class="docutils literal"><span class="pre">gcc</span></code> 就可以让它为你构建更加搞笑的目标文件和连接好的二进制文件，当然优化需要花更长的编译时间。我发现 <code class="docutils literal"><span class="pre">-O2</span></code> 对于产品来说是个不错的适中选择：</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">gcc</span> <span class="pre">-O1</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">gcc</span> <span class="pre">-O2</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">gcc</span> <span class="pre">-O3</span></tt></li>
+<li><code class="docutils literal"><span class="pre">gcc</span> <span class="pre">-O1</span></code></li>
+<li><code class="docutils literal"><span class="pre">gcc</span> <span class="pre">-O2</span></code></li>
+<li><code class="docutils literal"><span class="pre">gcc</span> <span class="pre">-O3</span></code></li>
 </ul>
 <p>就像其他 Bash 命令一样，它们都可以直接从 Vim 呼叫：</p>
-<div class="highlight-bash"><div class="highlight"><pre>:!gcc % -o example
+<div class="highlight-bash"><div class="highlight"><pre><span></span>:!gcc % -o example
 </pre></div>
 </div>
 </div>
@@ -167,34 +168,35 @@
 <div class="section" id="id13">
 <h2>内联<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h2>
 <p>以下任意一种方式你都能够运行 Perl 代码的字符串。此例为在屏幕上打印一行“Hello, world.”，并且另起一行。第一种可能是最简约最标准的方法；而第二种则使用了 <a class="reference external" href="http://tldp.org/LDP/abs/html/here-docs.html">heredoc</a> 字符串；第三种则是使用了经典的 Unix shell pipe。</p>
-<div class="highlight-bash"><pre>$ perl -e 'print "Hello world.\n";'
-$ perl &lt;&lt;&lt;'print "Hello world.\n";'
-$ echo 'print "Hello world.\n";' | perl</pre>
-</div>
-<p>当然，更典型的是将代码保存在文件中，那文件也可以直接被运行：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>perl hello.pl
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ perl -e <span class="s1">&#39;print &quot;Hello world.\n&quot;;&#39;</span>
+$ perl <span class="o">&lt;&lt;&lt;</span><span class="s1">&#39;print &quot;Hello world.\n&quot;;&#39;</span>
+$ <span class="nb">echo</span> <span class="s1">&#39;print &quot;Hello world.\n&quot;;&#39;</span> <span class="p">|</span> perl
 </pre></div>
 </div>
-<p>不管用以上何种方式运行，你都可以在不运行的前提情况下用 <tt class="docutils literal"><span class="pre">-c</span></tt> 来检查代码的语法：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>perl -c hello.pl
+<p>当然，更典型的是将代码保存在文件中，那文件也可以直接被运行：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ perl hello.pl
+</pre></div>
+</div>
+<p>不管用以上何种方式运行，你都可以在不运行的前提情况下用 <code class="docutils literal"><span class="pre">-c</span></code> 来检查代码的语法：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ perl -c hello.pl
 </pre></div>
 </div>
 <p>但是如果要把这种脚本当作逻辑化的二进制文件用，即你可以直接运行它而不需要知道或关系此脚本的种类。你就得在代码最前面加上所谓的“shebang”特殊的一行，它会指定用什么解释器来运行下面的脚本。</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c">#!/usr/bin/env perl</span>
-print <span class="s2">&quot;Hello, world.\n&quot;</span>;
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env perl</span>
+print <span class="s2">&quot;Hello, world.\n&quot;</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>然后需要用 <tt class="docutils literal"><span class="pre">chmod</span></tt> 把脚本设置成可执行模式。在此，将其后缀抹去也是个很好的实践，因为现在脚本已经被当作逻辑化二进制文件了：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>mv hello<span class="o">{</span>.pl,<span class="o">}</span>
-<span class="nv">$ </span>chmod +x hello
+<p>然后需要用 <code class="docutils literal"><span class="pre">chmod</span></code> 把脚本设置成可执行模式。在此，将其后缀抹去也是个很好的实践，因为现在脚本已经被当作逻辑化二进制文件了：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ mv hello<span class="o">{</span>.pl,<span class="o">}</span>
+$ chmod +x hello
 </pre></div>
 </div>
 <p>这样就可以像运行编译好的二进制文件一样来直接运行它了：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./hello
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ./hello
 </pre></div>
 </div>
-<p>这种用法很好用以至于现在很多现代化的 Linux 系统中都在用 Perl 甚至 Python 做常用工具，比如 <tt class="docutils literal"><span class="pre">adduser</span></tt> 就是 <tt class="docutils literal"><span class="pre">useradd</span></tt> 的友好前端工具。</p>
-<p>下一篇文章，我将介绍用 <tt class="docutils literal"><span class="pre">make</span></tt> 来可匹敌 IDE 的定义和自动化建立项目。让我们向拥抱同样想法 Ruby 的 <tt class="docutils literal"><span class="pre">rake</span></tt> 打个招呼。</p>
+<p>这种用法很好用以至于现在很多现代化的 Linux 系统中都在用 Perl 甚至 Python 做常用工具，比如 <code class="docutils literal"><span class="pre">adduser</span></code> 就是 <code class="docutils literal"><span class="pre">useradd</span></code> 的友好前端工具。</p>
+<p>下一篇文章，我将介绍用 <code class="docutils literal"><span class="pre">make</span></code> 来可匹敌 IDE 的定义和自动化建立项目。让我们向拥抱同样想法 Ruby 的 <code class="docutils literal"><span class="pre">rake</span></code> 打个招呼。</p>
 </div>
 </div>
 
@@ -203,7 +205,7 @@ print <span class="s2">&quot;Hello, world.\n&quot;</span>;
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>导航</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -215,12 +217,12 @@ print <span class="s2">&quot;Hello, world.\n&quot;</span>;
         <li class="right" >
           <a href="editing.html" title="编辑器"
              >上一页</a> |</li>
-        <li><a href="index.html">Unix 即集成开发环境 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Unix 即集成开发环境 1.0 文档</a> &#187;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; 版权所有 Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
-      使用 <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+      由 <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8 创建。
     </div>
   </body>
 </html>

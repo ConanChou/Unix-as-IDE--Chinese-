@@ -1,20 +1,19 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_CN">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>版本控制 &mdash; Unix 即集成开发环境 1.0 documentation</title>
+    <title>版本控制 &#8212; Unix 即集成开发环境 1.0 文档</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -25,11 +24,13 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
-    <link rel="top" title="Unix 即集成开发环境 1.0 documentation" href="index.html" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="top" title="Unix 即集成开发环境 1.0 文档" href="index.html" />
     <link rel="prev" title="调试" href="debug.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>导航</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -38,52 +39,52 @@
         <li class="right" >
           <a href="debug.html" title="调试"
              accesskey="P">上一页</a> |</li>
-        <li><a href="index.html">Unix 即集成开发环境 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Unix 即集成开发环境 1.0 文档</a> &#187;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="id1">
 <h1>版本控制<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<p>现在，版本控制已经被视为专业软件开发中不可或缺的部分。图形化的集成开发环境例如 Eclipse 和 Visual Studio 已经包含版本控制，并且引入了对工业标准版本控制系统的支持。现代版本控制系统的血统可以追溯到来自于 <tt class="docutils literal"><span class="pre">diff</span></tt> 和 <tt class="docutils literal"><span class="pre">patch</span></tt> 等 Unix 程序的概念。而且依旧有很多人坚持认为最好的版本控制系统是命令行形式的。</p>
-<p>在这个系列的最后一篇文章中，我会跟随常见开源版本控制系统发展的脚步，在最早的版本控制中从 <tt class="docutils literal"><span class="pre">diff</span></tt> 和 <tt class="docutils literal"><span class="pre">patch</span></tt> 的基本概念开始。</p>
+<p>现在，版本控制已经被视为专业软件开发中不可或缺的部分。图形化的集成开发环境例如 Eclipse 和 Visual Studio 已经包含版本控制，并且引入了对工业标准版本控制系统的支持。现代版本控制系统的血统可以追溯到来自于 <code class="docutils literal"><span class="pre">diff</span></code> 和 <code class="docutils literal"><span class="pre">patch</span></code> 等 Unix 程序的概念。而且依旧有很多人坚持认为最好的版本控制系统是命令行形式的。</p>
+<p>在这个系列的最后一篇文章中，我会跟随常见开源版本控制系统发展的脚步，在最早的版本控制中从 <code class="docutils literal"><span class="pre">diff</span></code> 和 <code class="docutils literal"><span class="pre">patch</span></code> 的基本概念开始。</p>
 <div class="section" id="diff-patch-rcs">
-<h2><tt class="docutils literal"><span class="pre">diff</span></tt>、 <tt class="docutils literal"><span class="pre">patch</span></tt> 和 RCS<a class="headerlink" href="#diff-patch-rcs" title="永久链接至标题">¶</a></h2>
-<p>版本控制的一个核心概念就是 <em>unified diff</em>，即统一差别格式，一种使用人机皆可理解的表达方式来表现文件中的变化。 <tt class="docutils literal"><span class="pre">diff</span></tt> 命令最初是由 Douglas McIlroy 在1974年随着第五版Unix发行的，所以它可以称得上是现代系统中仍在使用的最老的命令之一。</p>
+<h2><code class="docutils literal"><span class="pre">diff</span></code>、 <code class="docutils literal"><span class="pre">patch</span></code> 和 RCS<a class="headerlink" href="#diff-patch-rcs" title="永久链接至标题">¶</a></h2>
+<p>版本控制的一个核心概念就是 <em>unified diff</em>，即统一差别格式，一种使用人机皆可理解的表达方式来表现文件中的变化。 <code class="docutils literal"><span class="pre">diff</span></code> 命令最初是由 Douglas McIlroy 在1974年随着第五版Unix发行的，所以它可以称得上是现代系统中仍在使用的最老的命令之一。</p>
 <p>统一差别格式（ <em>unified diff</em> ）是最常见的可协作格式，可以由比较一个文件的两个不同版本来产生，它遵循以下语法：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>diff -u example.<span class="o">{</span>1,2<span class="o">}</span>.c
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ diff -u example.<span class="o">{</span>1,2<span class="o">}</span>.c
 --- example.c.1    2012-02-15 20:15:37.000000000 +1300
 +++ example.c.2    2012-02-15 20:15:57.000000000 +1300
 @@ -1,8 +1,9 @@
-<span class="c">#include &lt;stdio.h&gt;</span>
+<span class="c1">#include &lt;stdio.h&gt;</span>
 +#include &lt;stdlib.h&gt;
 
 int main <span class="o">(</span>int argc, char* argv<span class="o">[])</span>
 <span class="o">{</span>
-    <span class="nb">printf</span><span class="o">(</span><span class="s2">&quot;Hello, world!\n&quot;</span><span class="o">)</span>;
--   <span class="k">return </span>0;
-+   <span class="k">return </span>EXIT_SUCCESS;
+    printf<span class="o">(</span><span class="s2">&quot;Hello, world!\n&quot;</span><span class="o">)</span><span class="p">;</span>
+-   <span class="k">return</span> 0<span class="p">;</span>
++   <span class="k">return</span> EXIT_SUCCESS<span class="p">;</span>
 <span class="o">}</span>
 </pre></div>
 </div>
-<p>在这个例子中，第二个文件比第一个文件中添加了一个头文件，并且其 <tt class="docutils literal"><span class="pre">main()</span></tt> 函数返回使用了标准的 <tt class="docutils literal"><span class="pre">EXIT_SUCCESS</span></tt> 而不是数字 <tt class="docutils literal"><span class="pre">0</span></tt>。并且注意开头， <tt class="docutils literal"><span class="pre">diff</span></tt> 还给出了了相应元数据，例如比较的文件名还有文件的最后修改时间。</p>
-<p>在代码量较大的情况下，一种原始的版本控制方法即是交换`diff`输出。这些输出被称作 <em>patches</em>，即补丁，补丁可以用 <tt class="docutils literal"><span class="pre">patch</span></tt> 来补到原基础代码上。我们可以这样将上面例子的 <tt class="docutils literal"><span class="pre">diff</span></tt> 输出保存成补丁：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>diff -u example.<span class="o">{</span>1,2<span class="o">}</span>.c &gt; example.patch
+<p>在这个例子中，第二个文件比第一个文件中添加了一个头文件，并且其 <code class="docutils literal"><span class="pre">main()</span></code> 函数返回使用了标准的 <code class="docutils literal"><span class="pre">EXIT_SUCCESS</span></code> 而不是数字 <code class="docutils literal"><span class="pre">0</span></code>。并且注意开头， <code class="docutils literal"><span class="pre">diff</span></code> 还给出了了相应元数据，例如比较的文件名还有文件的最后修改时间。</p>
+<p>在代码量较大的情况下，一种原始的版本控制方法即是交换`diff`输出。这些输出被称作 <em>patches</em>，即补丁，补丁可以用 <code class="docutils literal"><span class="pre">patch</span></code> 来补到原基础代码上。我们可以这样将上面例子的 <code class="docutils literal"><span class="pre">diff</span></code> 输出保存成补丁：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ diff -u example.<span class="o">{</span>1,2<span class="o">}</span>.c &gt; example.patch
 </pre></div>
 </div>
 <p>然后我们就可以把补丁发送给一个尚在使用旧版源文件的开发者，然后他就可以像这样自动化打补丁：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>patch example.1.c &lt; example.patch
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ patch example.1.c &lt; example.patch
 </pre></div>
 </div>
-<p>补丁文件可以包含本目录及子目录内多组 <tt class="docutils literal"><span class="pre">diff</span></tt> 文件比较输出的结果，这样补丁就可以很容易地应用到源代码树上了。</p>
-<p>使用 <tt class="docutils literal"><span class="pre">diff</span></tt> 输出来跟踪改动所涉及的操作足够规则用以保存改动历史，
+<p>补丁文件可以包含本目录及子目录内多组 <code class="docutils literal"><span class="pre">diff</span></code> 文件比较输出的结果，这样补丁就可以很容易地应用到源代码树上了。</p>
+<p>使用 <code class="docutils literal"><span class="pre">diff</span></code> 输出来跟踪改动所涉及的操作足够规则用以保存改动历史，
 人们开发出了 <a class="reference external" href="http://en.wikipedia.org/wiki/Source_Code_Control_System">Source Code Control System</a> 和 <a class="reference external" href="http://en.wikipedia.org/wiki/Revision_Control_System">Revision Control
-System</a> （译注：源代码控制系统，暂无中文维基页面，出于可信度考虑不引用其他百科） 来实现这一目的，基本上已经取代了 <tt class="docutils literal"><span class="pre">diff</span></tt> 输出的方法。RCS提供了“锁定（lock）”文件的功能，防止一个文件在被“签出（check out）”时被其他人修改。这个概念给其他更成熟的版本控制系统铺平了道路。</p>
-<p>RCS保留了简单易用的优势。将一个文件纳入版本控制，只需要键入 <tt class="docutils literal"><span class="pre">ci</span> <span class="pre">&lt;filename&gt;</span></tt> 并且提供一个合适的文件描述：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ci example.c
+System</a> （译注：源代码控制系统，暂无中文维基页面，出于可信度考虑不引用其他百科） 来实现这一目的，基本上已经取代了 <code class="docutils literal"><span class="pre">diff</span></code> 输出的方法。RCS提供了“锁定（lock）”文件的功能，防止一个文件在被“签出（check out）”时被其他人修改。这个概念给其他更成熟的版本控制系统铺平了道路。</p>
+<p>RCS保留了简单易用的优势。将一个文件纳入版本控制，只需要键入 <code class="docutils literal"><span class="pre">ci</span> <span class="pre">&lt;filename&gt;</span></code> 并且提供一个合适的文件描述：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ci example.c
 example.c,v  &lt;--  example.c
 enter description, terminated with single <span class="s1">&#39;.&#39;</span> or end of file:
 NOTE: This is NOT the log message!
@@ -93,23 +94,23 @@ initial revision: 1.1
 <span class="k">done</span>
 </pre></div>
 </div>
-<p>这样就在该文件目录内创建了一个新文件 <tt class="docutils literal"><span class="pre">example.c,v</span></tt>，用来跟踪文件的修改。修改文件之前，你需要 <em>签出（check out）</em> ，然后修改，最后再把它 <em>签入（check in）</em> 回去：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>co -l example.c
+<p>这样就在该文件目录内创建了一个新文件 <code class="docutils literal"><span class="pre">example.c,v</span></code>，用来跟踪文件的修改。修改文件之前，你需要 <em>签出（check out）</em> ，然后修改，最后再把它 <em>签入（check in）</em> 回去：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ co -l example.c
 example.c,v  --&gt;  example.c
 revision 1.1 <span class="o">(</span>locked<span class="o">)</span>
 <span class="k">done</span>
-<span class="nv">$ </span>vim example.c
-<span class="nv">$ </span>ci -u example.c
+$ vim example.c
+$ ci -u example.c
 example.c,v  &lt;--  example.c
-new revision: 1.2; previous revision: 1.1
+new revision: 1.2<span class="p">;</span> previous revision: 1.1
 enter log message, terminated with single <span class="s1">&#39;.&#39;</span> or end of file:
 &gt;&gt; added a line
 &gt;&gt; .
 <span class="k">done</span>
 </pre></div>
 </div>
-<p>你可以使用 <tt class="docutils literal"><span class="pre">rlog</span></tt> 来查看一个项目的修改历史：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>rlog example.c
+<p>你可以使用 <code class="docutils literal"><span class="pre">rlog</span></code> 来查看一个项目的修改历史：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ rlog example.c
 
 RCS file: example.c,v
 Working file: example.c
@@ -119,21 +120,21 @@ locks: strict
 access list:
 symbolic names:
 keyword substitution: kv
-total revisions: 2; selected revisions: 2
+total revisions: 2<span class="p">;</span> selected revisions: 2
 description:
 example file
 ----------------------------
 revision 1.2
-date: 2012/02/15 07:39:16;  author: tom;  state: Exp;  lines: +1 -0
+date: 2012/02/15 07:39:16<span class="p">;</span>  author: tom<span class="p">;</span>  state: Exp<span class="p">;</span>  lines: +1 -0
 added a line
 ----------------------------
 revision 1.1
-date: 2012/02/15 07:36:23;  author: tom;  state: Exp;
+date: 2012/02/15 07:36:23<span class="p">;</span>  author: tom<span class="p">;</span>  state: Exp<span class="p">;</span>
 Initial revision
 </pre></div>
 </div>
-<p>使用 <cite>rcsdiff -u</cite> 命令获得两个修订版本之间统一差别（ <tt class="docutils literal"><span class="pre">diff</span></tt> ）格式的补丁文件：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>rcsdiff -u -r1.1 -r1.2 ./example.c
+<p>使用 <cite>rcsdiff -u</cite> 命令获得两个修订版本之间统一差别（ <code class="docutils literal"><span class="pre">diff</span></code> ）格式的补丁文件：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ rcsdiff -u -r1.1 -r1.2 ./example.c
 <span class="o">===================================================================</span>
 RCS file: ./example.c,v
 retrieving revision 1.1
@@ -144,9 +145,9 @@ diff -u -r1.1 -r1.2
 @@ -4,6 +4,7 @@
 int main <span class="o">(</span>int argc, char* argv<span class="o">[])</span>
 <span class="o">{</span>
-    <span class="nb">printf</span><span class="o">(</span><span class="s2">&quot;Hello, world!\n&quot;</span><span class="o">)</span>;
-+   <span class="nb">printf</span><span class="o">(</span><span class="s2">&quot;Extra line!\n&quot;</span><span class="o">)</span>;
-    <span class="k">return </span>EXIT_SUCCESS;
+    printf<span class="o">(</span><span class="s2">&quot;Hello, world!\n&quot;</span><span class="o">)</span><span class="p">;</span>
++   printf<span class="o">(</span><span class="s2">&quot;Extra line!\n&quot;</span><span class="o">)</span><span class="p">;</span>
+    <span class="k">return</span> EXIT_SUCCESS<span class="p">;</span>
 <span class="o">}</span>
 </pre></div>
 </div>
@@ -155,17 +156,17 @@ int main <span class="o">(</span>int argc, char* argv<span class="o">[])</span>
 <div class="section" id="cvs-subversion">
 <h2>CVS 和 Subversion<a class="headerlink" href="#cvs-subversion" title="永久链接至标题">¶</a></h2>
 <p>为了解决多个开发者基于同一个代码做修改的问题，人们就开发了 <em>中心化版本控制系统</em> ，最早的是 <a class="reference external" href="http://zh.wikipedia.org/wiki/%E5%8D%94%E4%BD%9C%E7%89%88%E6%9C%AC%E7%B3%BB%E7%B5%B1">协作版本系统 (CVS)</a> ，之后出现了稍微高级一些的 <a class="reference external" href="http://zh.wikipedia.org/wiki/Subversion">Subversion</a>。这些系统的核心特性就是任何时刻或者任何修订版代码的官方版本都能从作为代码仓库的 <em>中心服务器</em> 上得到。如此获得的一个代码库被称为 <em>工作副本</em>。</p>
-<p>对于这些系统来说，基本的操作单位叫做 <em>变更集（changeset）</em>。早期此类系统中最常见的向用户表现 <em>变更集</em> 的方式就是通过提供一个原型 <tt class="docutils literal"><span class="pre">diff</span></tt> 格式输出。这两种版本控制系统的工作方式都是记录变更集，而不是记录不同版本的原始文件本身。</p>
-<p>这一代版本控制系统还引入了一些其他概念。例如 <em>分支（branch）</em> 一个项目，使得一个项目的多个不同版本可以同时存在同时修改，最终通过一些列测试和审查合并到主线或者叫 <em>主干（trunk）</em> 中。类似的一个概念是 <em>标签</em>，可以将代码库的一个特定的版本标记为对应软件的一个发布版本。 <tt class="docutils literal"><span class="pre">merge</span></tt>（合并）的概念也引入了，允许手动解决因为对同一个文件的同部分修改所造成冲突。</p>
+<p>对于这些系统来说，基本的操作单位叫做 <em>变更集（changeset）</em>。早期此类系统中最常见的向用户表现 <em>变更集</em> 的方式就是通过提供一个原型 <code class="docutils literal"><span class="pre">diff</span></code> 格式输出。这两种版本控制系统的工作方式都是记录变更集，而不是记录不同版本的原始文件本身。</p>
+<p>这一代版本控制系统还引入了一些其他概念。例如 <em>分支（branch）</em> 一个项目，使得一个项目的多个不同版本可以同时存在同时修改，最终通过一些列测试和审查合并到主线或者叫 <em>主干（trunk）</em> 中。类似的一个概念是 <em>标签</em>，可以将代码库的一个特定的版本标记为对应软件的一个发布版本。 <code class="docutils literal"><span class="pre">merge</span></code>（合并）的概念也引入了，允许手动解决因为对同一个文件的同部分修改所造成冲突。</p>
 </div>
 <div class="section" id="git-mercurial">
 <h2>Git 和 Mercurial<a class="headerlink" href="#git-mercurial" title="永久链接至标题">¶</a></h2>
-<p>后一代版本控制系统则是 <em>分布式</em> ，或者叫 <em>无中心式</em> 的系统。在这些系统中工作副本包括了代码和项目的完整历史，所以不需要中心服务器就可以向这个项目提交修改。在开源、Unix 友好的环境中，突出的此类系统是 Git 和 Mercurial，它们的客户端程序是 <tt class="docutils literal"><span class="pre">git</span></tt> 和 <tt class="docutils literal"><span class="pre">hg</span></tt>。</p>
-<p>这两种系统中，交换变更集的操作是 <tt class="docutils literal"><span class="pre">push</span></tt>（推送）， <tt class="docutils literal"><span class="pre">pull</span></tt>（拉取）和 <tt class="docutils literal"><span class="pre">merge</span></tt>（合并），一个仓库的修改可以被另一个接受。这样的无中心系统允许一种很复杂但是受到严格控制的开发生态。Git 就是 Linux Trovalds 为管理 Linux 内核开发工作而开发的分布式版本控制系统。</p>
-<p>Git 和 Mercurial 不同于 CVS 和 Subversion，它们的基本操作单位不是修改集，而是压缩保存的完整的文件（blob）。这样搜索某单个文件的历史或者查阅某文件的两个版本间的修改成本会略高，但是对于每个修订版 <tt class="docutils literal"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--patch</span></tt> 命令仍然能输出统一 <tt class="docutils literal"><span class="pre">diff</span></tt> 格式，即便是在 <tt class="docutils literal"><span class="pre">diff</span></tt> 命令出现四十年之后的今天：</p>
-<div class="highlight-bash"><div class="highlight"><pre>commit c1e5559ddb09f8d02b989596b0f4100ad1aab422
+<p>后一代版本控制系统则是 <em>分布式</em> ，或者叫 <em>无中心式</em> 的系统。在这些系统中工作副本包括了代码和项目的完整历史，所以不需要中心服务器就可以向这个项目提交修改。在开源、Unix 友好的环境中，突出的此类系统是 Git 和 Mercurial，它们的客户端程序是 <code class="docutils literal"><span class="pre">git</span></code> 和 <code class="docutils literal"><span class="pre">hg</span></code>。</p>
+<p>这两种系统中，交换变更集的操作是 <code class="docutils literal"><span class="pre">push</span></code>（推送）， <code class="docutils literal"><span class="pre">pull</span></code>（拉取）和 <code class="docutils literal"><span class="pre">merge</span></code>（合并），一个仓库的修改可以被另一个接受。这样的无中心系统允许一种很复杂但是受到严格控制的开发生态。Git 就是 Linux Trovalds 为管理 Linux 内核开发工作而开发的分布式版本控制系统。</p>
+<p>Git 和 Mercurial 不同于 CVS 和 Subversion，它们的基本操作单位不是修改集，而是压缩保存的完整的文件（blob）。这样搜索某单个文件的历史或者查阅某文件的两个版本间的修改成本会略高，但是对于每个修订版 <code class="docutils literal"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--patch</span></code> 命令仍然能输出统一 <code class="docutils literal"><span class="pre">diff</span></code> 格式，即便是在 <code class="docutils literal"><span class="pre">diff</span></code> 命令出现四十年之后的今天：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>commit c1e5559ddb09f8d02b989596b0f4100ad1aab422
 Author: Tom Ryder &lt;tom@sanctum.geek.nz&gt;
-Date:   Thu Feb 2 01:14:21 2012
+Date:   Thu Feb <span class="m">2</span> 01:14:21 2012
 
     Changed my mind about this one.
 
@@ -173,16 +174,16 @@ diff --git a/vim/vimrc b/vim/vimrc
 index cfbe8e0..65a3143 100644
 --- a/vim/vimrc
 +++ b/vim/vimrc
-@@ -47,10 +47,6 @@ <span class="nb">set </span><span class="nv">shiftwidth</span><span class="o">=</span>4
- <span class="nb">set </span><span class="nv">softtabstop</span><span class="o">=</span>4
- <span class="nb">set </span><span class="nv">tabstop</span><span class="o">=</span>4
+@@ -47,10 +47,6 @@ <span class="nb">set</span> <span class="nv">shiftwidth</span><span class="o">=</span>4
+ <span class="nb">set</span> <span class="nv">softtabstop</span><span class="o">=</span>4
+ <span class="nb">set</span> <span class="nv">tabstop</span><span class="o">=</span>4
 
 -<span class="s2">&quot; Heresy</span>
 <span class="s2">-inoremap &lt;C-a&gt; &lt;Home&gt;</span>
 <span class="s2">-inoremap &lt;C-e&gt; &lt;End&gt;</span>
 <span class="s2">-</span>
 <span class="s2"> &quot;</span> History
- <span class="nb">set history</span><span class="o">=</span>1000
+ <span class="nb">set</span> <span class="nv">history</span><span class="o">=</span>1000
 </pre></div>
 </div>
 <p>这两种系统在功能甚至命令集上都有很多交叠，应该使用哪一种已经导致了 <a class="reference external" href="http://stackoverflow.com/questions/35837/what-is-the-difference-between-mercurial-and-git">大量争论</a>。我见过的有关这两种系统的最好的介绍是 Scott Chacon 的 <a class="reference external" href="http://progit.org/">Pro Git</a> 和 Joel Spolsky 的 <a class="reference external" href="http://hginit.com/">Hg Init</a>。</p>
@@ -198,7 +199,7 @@ index cfbe8e0..65a3143 100644
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>导航</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -207,12 +208,12 @@ index cfbe8e0..65a3143 100644
         <li class="right" >
           <a href="debug.html" title="调试"
              >上一页</a> |</li>
-        <li><a href="index.html">Unix 即集成开发环境 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Unix 即集成开发环境 1.0 文档</a> &#187;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; 版权所有 Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
-      使用 <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+      由 <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8 创建。
     </div>
   </body>
 </html>

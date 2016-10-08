@@ -1,20 +1,19 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_CN">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>文件 &mdash; Unix 即集成开发环境 1.0 documentation</title>
+    <title>文件 &#8212; Unix 即集成开发环境 1.0 文档</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -25,12 +24,14 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
-    <link rel="top" title="Unix 即集成开发环境 1.0 documentation" href="index.html" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="top" title="Unix 即集成开发环境 1.0 文档" href="index.html" />
     <link rel="next" title="编辑器" href="editing.html" />
     <link rel="prev" title="前言" href="introduction.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>导航</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -42,38 +43,38 @@
         <li class="right" >
           <a href="introduction.html" title="前言"
              accesskey="P">上一页</a> |</li>
-        <li><a href="index.html">Unix 即集成开发环境 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Unix 即集成开发环境 1.0 文档</a> &#187;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="id1">
 <h1>文件<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <p>自带的文件管理系统是 IDE 亮点功能之一，从最基本的文件移动、重命名和删除功能，到更加具体的编译和句法检查。批量文件的操作也非常有用，比如找出某种后缀或大小的所有文件，或者搜索出有一定命名模式的文件。在本系列的第一篇文章里，我将考察一些非常有用的工具来对批量文件进行操作，这些工具应该也是大多数 Linux 用户所熟知的。</p>
 <div class="section" id="id2">
 <h2>列举文件<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">ls</span></tt> 恐怕是某管理员最初学的用以显示某路径下的文件列表的命令之一，而大多数管理员也应该是知道 <tt class="docutils literal"><span class="pre">-a</span></tt> 和 <tt class="docutils literal"><span class="pre">-l</span></tt> 选项，它们分别是用来显示包括点文件（即隐藏文件）在内的所有文件和更详细的文件相关的信息栏。</p>
-<p>还有一些 <tt class="docutils literal"><span class="pre">ls</span></tt> 的选项不那么常用，但是对编程很有帮助：</p>
+<p><code class="docutils literal"><span class="pre">ls</span></code> 恐怕是某管理员最初学的用以显示某路径下的文件列表的命令之一，而大多数管理员也应该是知道 <code class="docutils literal"><span class="pre">-a</span></code> 和 <code class="docutils literal"><span class="pre">-l</span></code> 选项，它们分别是用来显示包括点文件（即隐藏文件）在内的所有文件和更详细的文件相关的信息栏。</p>
+<p>还有一些 <code class="docutils literal"><span class="pre">ls</span></code> 的选项不那么常用，但是对编程很有帮助：</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">-t</span></tt> —— 按最后编辑日期排序，最新的最先。这在某个大目录里找出最近修改的文件列表时很有用，比如将结果导入（ <tt class="docutils literal"><span class="pre">pipe</span></tt> ） <tt class="docutils literal"><span class="pre">head</span></tt> 或者 <tt class="docutils literal"><span class="pre">sed</span> <span class="pre">10q</span></tt>。或许加上 <tt class="docutils literal"><span class="pre">-l</span></tt> 会效果更好。当然如果你想获取最旧的文件列表，只要加 <tt class="docutils literal"><span class="pre">-r</span></tt> 反转列表即可。</li>
-<li><tt class="docutils literal"><span class="pre">-X</span></tt> —— 按文件类型分类。这在多语言或多后缀的项目中特别方便，比如头文件和源文件分开，或区分开源文件和生成文件或目录。</li>
-<li><tt class="docutils literal"><span class="pre">-v</span></tt> —— 按照文件名里的版本号排序。</li>
-<li><tt class="docutils literal"><span class="pre">-S</span></tt> —— 按文件大小排序。</li>
-<li><tt class="docutils literal"><span class="pre">-R</span></tt> —— 递归地列举文件。这个选项和 <tt class="docutils literal"><span class="pre">-l</span></tt> 组合使用并将结果导出到 <tt class="docutils literal"><span class="pre">less</span></tt> 效果很好。</li>
+<li><code class="docutils literal"><span class="pre">-t</span></code> —— 按最后编辑日期排序，最新的最先。这在某个大目录里找出最近修改的文件列表时很有用，比如将结果导入（ <code class="docutils literal"><span class="pre">pipe</span></code> ） <code class="docutils literal"><span class="pre">head</span></code> 或者 <code class="docutils literal"><span class="pre">sed</span> <span class="pre">10q</span></code>。或许加上 <code class="docutils literal"><span class="pre">-l</span></code> 会效果更好。当然如果你想获取最旧的文件列表，只要加 <code class="docutils literal"><span class="pre">-r</span></code> 反转列表即可。</li>
+<li><code class="docutils literal"><span class="pre">-X</span></code> —— 按文件类型分类。这在多语言或多后缀的项目中特别方便，比如头文件和源文件分开，或区分开源文件和生成文件或目录。</li>
+<li><code class="docutils literal"><span class="pre">-v</span></code> —— 按照文件名里的版本号排序。</li>
+<li><code class="docutils literal"><span class="pre">-S</span></code> —— 按文件大小排序。</li>
+<li><code class="docutils literal"><span class="pre">-R</span></code> —— 递归地列举文件。这个选项和 <code class="docutils literal"><span class="pre">-l</span></code> 组合使用并将结果导出到 <code class="docutils literal"><span class="pre">less</span></code> 效果很好。</li>
 </ul>
-<p>因为生成的列表就是文本，所以你其实可以把结果导出给类似 <tt class="docutils literal"><span class="pre">vim</span></tt> 的进程，然后再加上一些对每个文件作用的解释，这就成了一个目录文件，又或者把列表加进 README 文件：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ls -XR | vim -
+<p>因为生成的列表就是文本，所以你其实可以把结果导出给类似 <code class="docutils literal"><span class="pre">vim</span></code> 的进程，然后再加上一些对每个文件作用的解释，这就成了一个目录文件，又或者把列表加进 README 文件：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ls -XR <span class="p">|</span> vim -
 </pre></div>
 </div>
-<p>这种工作其实我们可以很容易地让 <tt class="docutils literal"><span class="pre">make</span></tt> 自动生成，我会在之后的文章里谈到。</p>
+<p>这种工作其实我们可以很容易地让 <code class="docutils literal"><span class="pre">make</span></code> 自动生成，我会在之后的文章里谈到。</p>
 </div>
 <div class="section" id="id3">
 <h2>查找文件<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
-<p>非常有趣的是你其实可以只用一个 <tt class="docutils literal"><span class="pre">find</span></tt> 命令，不用任何其他参数就列出所有文件，甚至还包括相对路径。当然如果把结果导入 <tt class="docutils literal"><span class="pre">sort</span></tt> 肯定效果更好：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>find | sort
+<p>非常有趣的是你其实可以只用一个 <code class="docutils literal"><span class="pre">find</span></code> 命令，不用任何其他参数就列出所有文件，甚至还包括相对路径。当然如果把结果导入 <code class="docutils literal"><span class="pre">sort</span></code> 肯定效果更好：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ find <span class="p">|</span> sort
 .
 ./Makefile
 ./README
@@ -91,94 +92,94 @@
 ./tests/suite4.pl
 </pre></div>
 </div>
-<p>如果你想要 <tt class="docutils literal"><span class="pre">ls</span> <span class="pre">-l</span></tt> 样式的列表，只要在 <tt class="docutils literal"><span class="pre">find</span></tt> 后面加上 <tt class="docutils literal"><span class="pre">-ls</span></tt>：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>find -ls | sort -k 11
-1155096    4 drwxr-xr-x   4 tom      tom          4096 Feb 10 09:37 .
-1155152    4 drwxr-xr-x   2 tom      tom          4096 Feb 10 09:17 ./build
-1155155    4 -rw-r--r--   1 tom      tom          2290 Jan 11 07:21 ./client.c
-1155157    4 -rw-r--r--   1 tom      tom          1871 Jan 11 16:41 ./client.h
-1155159   32 -rw-r--r--   1 tom      tom         30390 Jan 10 15:29 ./common.h
-1155153   24 -rw-r--r--   1 tom      tom         21170 Jan 11 05:43 ./Makefile
-1155154   16 -rw-r--r--   1 tom      tom         13966 Jan 14 07:39 ./project.c
-1155080   28 -rw-r--r--   1 tom      tom         25840 Jan 15 22:28 ./README
-1155156   32 -rw-r--r--   1 tom      tom         31124 Jan 11 02:34 ./server.c
-1155158    4 -rw-r--r--   1 tom      tom          3599 Jan 16 05:27 ./server.h
-1155160    4 drwxr-xr-x   2 tom      tom          4096 Feb 10 09:29 ./tests
-1155161    4 -rw-r--r--   1 tom      tom           288 Jan 13 03:04 ./tests/suite1.pl
-1155162    4 -rw-r--r--   1 tom      tom          1792 Jan 13 10:06 ./tests/suite2.pl
-1155163    4 -rw-r--r--   1 tom      tom           112 Jan  9 23:42 ./tests/suite3.pl
-1155164    4 -rw-r--r--   1 tom      tom           144 Jan 15 02:10 ./tests/suite4.pl
+<p>如果你想要 <code class="docutils literal"><span class="pre">ls</span> <span class="pre">-l</span></code> 样式的列表，只要在 <code class="docutils literal"><span class="pre">find</span></code> 后面加上 <code class="docutils literal"><span class="pre">-ls</span></code>：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ find -ls <span class="p">|</span> sort -k 11
+<span class="m">1155096</span>    <span class="m">4</span> drwxr-xr-x   <span class="m">4</span> tom      tom          <span class="m">4096</span> Feb <span class="m">10</span> 09:37 .
+<span class="m">1155152</span>    <span class="m">4</span> drwxr-xr-x   <span class="m">2</span> tom      tom          <span class="m">4096</span> Feb <span class="m">10</span> 09:17 ./build
+<span class="m">1155155</span>    <span class="m">4</span> -rw-r--r--   <span class="m">1</span> tom      tom          <span class="m">2290</span> Jan <span class="m">11</span> 07:21 ./client.c
+<span class="m">1155157</span>    <span class="m">4</span> -rw-r--r--   <span class="m">1</span> tom      tom          <span class="m">1871</span> Jan <span class="m">11</span> 16:41 ./client.h
+<span class="m">1155159</span>   <span class="m">32</span> -rw-r--r--   <span class="m">1</span> tom      tom         <span class="m">30390</span> Jan <span class="m">10</span> 15:29 ./common.h
+<span class="m">1155153</span>   <span class="m">24</span> -rw-r--r--   <span class="m">1</span> tom      tom         <span class="m">21170</span> Jan <span class="m">11</span> 05:43 ./Makefile
+<span class="m">1155154</span>   <span class="m">16</span> -rw-r--r--   <span class="m">1</span> tom      tom         <span class="m">13966</span> Jan <span class="m">14</span> 07:39 ./project.c
+<span class="m">1155080</span>   <span class="m">28</span> -rw-r--r--   <span class="m">1</span> tom      tom         <span class="m">25840</span> Jan <span class="m">15</span> 22:28 ./README
+<span class="m">1155156</span>   <span class="m">32</span> -rw-r--r--   <span class="m">1</span> tom      tom         <span class="m">31124</span> Jan <span class="m">11</span> 02:34 ./server.c
+<span class="m">1155158</span>    <span class="m">4</span> -rw-r--r--   <span class="m">1</span> tom      tom          <span class="m">3599</span> Jan <span class="m">16</span> 05:27 ./server.h
+<span class="m">1155160</span>    <span class="m">4</span> drwxr-xr-x   <span class="m">2</span> tom      tom          <span class="m">4096</span> Feb <span class="m">10</span> 09:29 ./tests
+<span class="m">1155161</span>    <span class="m">4</span> -rw-r--r--   <span class="m">1</span> tom      tom           <span class="m">288</span> Jan <span class="m">13</span> 03:04 ./tests/suite1.pl
+<span class="m">1155162</span>    <span class="m">4</span> -rw-r--r--   <span class="m">1</span> tom      tom          <span class="m">1792</span> Jan <span class="m">13</span> 10:06 ./tests/suite2.pl
+<span class="m">1155163</span>    <span class="m">4</span> -rw-r--r--   <span class="m">1</span> tom      tom           <span class="m">112</span> Jan  <span class="m">9</span> 23:42 ./tests/suite3.pl
+<span class="m">1155164</span>    <span class="m">4</span> -rw-r--r--   <span class="m">1</span> tom      tom           <span class="m">144</span> Jan <span class="m">15</span> 02:10 ./tests/suite4.pl
 </pre></div>
 </div>
-<p>要注意，在这种情况下，我得设定 <tt class="docutils literal"><span class="pre">sort</span></tt> 对第11列排序，即对文件名排序；这里所用的标签是 <tt class="docutils literal"><span class="pre">-k</span></tt>。</p>
-<p><tt class="docutils literal"><span class="pre">find</span></tt> 有它自己的一套复杂的过滤语句。下面列举的是一些最常用的你可以用以获取某些文件列表的过滤器：</p>
+<p>要注意，在这种情况下，我得设定 <code class="docutils literal"><span class="pre">sort</span></code> 对第11列排序，即对文件名排序；这里所用的标签是 <code class="docutils literal"><span class="pre">-k</span></code>。</p>
+<p><code class="docutils literal"><span class="pre">find</span></code> 有它自己的一套复杂的过滤语句。下面列举的是一些最常用的你可以用以获取某些文件列表的过滤器：</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">find</span> <span class="pre">-name</span> <span class="pre">'*.c'</span></tt> —— 查找符合某 shell 式样式的文件名的文件。用 <tt class="docutils literal"><span class="pre">iname</span></tt> 开启大小写不敏感搜索。</li>
-<li><tt class="docutils literal"><span class="pre">find</span> <span class="pre">-path</span> <span class="pre">'*test*'</span></tt> —— 查找符合某 shell 式样式的路径的文件。用 <tt class="docutils literal"><span class="pre">ipath</span></tt> 开启大小写不敏感搜索。</li>
-<li><tt class="docutils literal"><span class="pre">find</span> <span class="pre">-mtime</span> <span class="pre">-5</span></tt> —— 查找近五天内编辑过的文件。你也可以用 <tt class="docutils literal"><span class="pre">+5</span></tt> 来查找五天之前编辑过的文件。</li>
-<li><tt class="docutils literal"><span class="pre">find</span> <span class="pre">-newer</span> <span class="pre">server.c</span></tt> —— 查找比 <tt class="docutils literal"><span class="pre">server.c</span></tt> 更新的文件。</li>
-<li><tt class="docutils literal"><span class="pre">file</span> <span class="pre">-type</span> <span class="pre">d</span></tt> —— 查找所有文件夹。如果想找出所有文件，那就用 <tt class="docutils literal"><span class="pre">-type</span> <span class="pre">f</span></tt>；找符号连接就用 <tt class="docutils literal"><span class="pre">-type</span> <span class="pre">l</span></tt>。</li>
+<li><code class="docutils literal"><span class="pre">find</span> <span class="pre">-name</span> <span class="pre">'*.c'</span></code> —— 查找符合某 shell 式样式的文件名的文件。用 <code class="docutils literal"><span class="pre">iname</span></code> 开启大小写不敏感搜索。</li>
+<li><code class="docutils literal"><span class="pre">find</span> <span class="pre">-path</span> <span class="pre">'*test*'</span></code> —— 查找符合某 shell 式样式的路径的文件。用 <code class="docutils literal"><span class="pre">ipath</span></code> 开启大小写不敏感搜索。</li>
+<li><code class="docutils literal"><span class="pre">find</span> <span class="pre">-mtime</span> <span class="pre">-5</span></code> —— 查找近五天内编辑过的文件。你也可以用 <code class="docutils literal"><span class="pre">+5</span></code> 来查找五天之前编辑过的文件。</li>
+<li><code class="docutils literal"><span class="pre">find</span> <span class="pre">-newer</span> <span class="pre">server.c</span></code> —— 查找比 <code class="docutils literal"><span class="pre">server.c</span></code> 更新的文件。</li>
+<li><code class="docutils literal"><span class="pre">file</span> <span class="pre">-type</span> <span class="pre">d</span></code> —— 查找所有文件夹。如果想找出所有文件，那就用 <code class="docutils literal"><span class="pre">-type</span> <span class="pre">f</span></code>；找符号连接就用 <code class="docutils literal"><span class="pre">-type</span> <span class="pre">l</span></code>。</li>
 </ul>
 <p>要注意，上面提到的这些过滤器都是可以组合使用的，例如找出近两天内编辑过的 C 源码：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>find -name <span class="s1">&#39;*.c&#39;</span> -mtime -2
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ find -name <span class="s1">&#39;*.c&#39;</span> -mtime -2
 </pre></div>
 </div>
-<p>默认情况下， <tt class="docutils literal"><span class="pre">find</span></tt> 对搜索结果所采取的动作只是简单地通过标准输出输出一个列表，然而其实还有其他一些有用的后续动作：</p>
+<p>默认情况下， <code class="docutils literal"><span class="pre">find</span></code> 对搜索结果所采取的动作只是简单地通过标准输出输出一个列表，然而其实还有其他一些有用的后续动作：</p>
 <ul>
-<li><p class="first"><tt class="docutils literal"><span class="pre">-ls</span></tt> —— 如前文，提供了一种类 <tt class="docutils literal"><span class="pre">ls</span> <span class="pre">-l</span></tt> 式的列表。</p>
+<li><p class="first"><code class="docutils literal"><span class="pre">-ls</span></code> —— 如前文，提供了一种类 <code class="docutils literal"><span class="pre">ls</span> <span class="pre">-l</span></code> 式的列表。</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">-delete</span></tt> —— 删除符合查找条件的文件。</p>
+<li><p class="first"><code class="docutils literal"><span class="pre">-delete</span></code> —— 删除符合查找条件的文件。</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">-exec</span></tt> —— 对搜索结果里的每个文件都允许某个命令， <tt class="docutils literal"><span class="pre">{}</span></tt> 会被替换成适当的文件名，并且命令用 <tt class="docutils literal"><span class="pre">\;</span></tt> 终结。例如：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>find -name <span class="s1">&#39;*.pl&#39;</span> -exec perl -c <span class="o">{}</span> <span class="se">\;</span>
+<li><p class="first"><code class="docutils literal"><span class="pre">-exec</span></code> —— 对搜索结果里的每个文件都允许某个命令， <code class="docutils literal"><span class="pre">{}</span></code> 会被替换成适当的文件名，并且命令用 <code class="docutils literal"><span class="pre">\;</span></code> 终结。例如：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ find -name <span class="s1">&#39;*.pl&#39;</span> -exec perl -c <span class="o">{}</span> <span class="se">\;</span>
 </pre></div>
 </div>
-<p>然而在大多数情况下或许用 <tt class="docutils literal"><span class="pre">xargs</span></tt> 更加直接，所以把显示出来的结果像参数一样导入另一个命令就是：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>find -name <span class="s1">&#39;*.pl&#39;</span> | xargs perl -c
+<p>然而在大多数情况下或许用 <code class="docutils literal"><span class="pre">xargs</span></code> 更加直接，所以把显示出来的结果像参数一样导入另一个命令就是：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ find -name <span class="s1">&#39;*.pl&#39;</span> <span class="p">|</span> xargs perl -c
 </pre></div>
 </div>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">-print0</span></tt> —— 如果你正在处理带有空格文件名的文件，并且想把这些文件像上面的例子一样导入到 <tt class="docutils literal"><span class="pre">xargs</span></tt> 里，这个标签可以把所有的空格替换成空字符，当然另外在 <tt class="docutils literal"><span class="pre">xargs</span></tt> 也得加上 <tt class="docutils literal"><span class="pre">-0</span></tt> 选项：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>find -name <span class="s1">&#39;*.jpg&#39;</span> -print0 | xargs -0 jpegoptim
+<li><p class="first"><code class="docutils literal"><span class="pre">-print0</span></code> —— 如果你正在处理带有空格文件名的文件，并且想把这些文件像上面的例子一样导入到 <code class="docutils literal"><span class="pre">xargs</span></code> 里，这个标签可以把所有的空格替换成空字符，当然另外在 <code class="docutils literal"><span class="pre">xargs</span></code> 也得加上 <code class="docutils literal"><span class="pre">-0</span></code> 选项：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ find -name <span class="s1">&#39;*.jpg&#39;</span> -print0 <span class="p">|</span> xargs -0 jpegoptim
 </pre></div>
 </div>
 </li>
 </ul>
-<p>我还发现一个我经常使用的小技巧，就是用 <tt class="docutils literal"><span class="pre">find</span></tt> 生成一个文件列表，然后在 Vim 的垂直分窗中编辑：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>vim -O <span class="k">$(</span>find . -name <span class="s1">&#39;*.c&#39;</span><span class="k">)</span>
+<p>我还发现一个我经常使用的小技巧，就是用 <code class="docutils literal"><span class="pre">find</span></code> 生成一个文件列表，然后在 Vim 的垂直分窗中编辑：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ vim -O <span class="k">$(</span>find . -name <span class="s1">&#39;*.c&#39;</span><span class="k">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id4">
 <h2>搜索文件<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
-<p>更多时候，我们对基于文件内容的搜索比基于文件属性的搜索更感兴趣。这毫无疑问用 <tt class="docutils literal"><span class="pre">grep</span></tt>，更加具体来说，应该是 <tt class="docutils literal"><span class="pre">grep</span> <span class="pre">-R</span></tt>。它会递归地找出当前目录下符合‘someVar’的文件：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>grep -FR <span class="s1">&#39;someVar&#39;</span> .
+<p>更多时候，我们对基于文件内容的搜索比基于文件属性的搜索更感兴趣。这毫无疑问用 <code class="docutils literal"><span class="pre">grep</span></code>，更加具体来说，应该是 <code class="docutils literal"><span class="pre">grep</span> <span class="pre">-R</span></code>。它会递归地找出当前目录下符合‘someVar’的文件：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ grep -FR <span class="s1">&#39;someVar&#39;</span> .
 </pre></div>
 </div>
-<p>別忘了大小不敏感的标签，因为 <tt class="docutils literal"><span class="pre">grep</span></tt> 默认工作方式是大小写敏感的：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>grep -iR <span class="s1">&#39;somevar&#39;</span> .
+<p>別忘了大小不敏感的标签，因为 <code class="docutils literal"><span class="pre">grep</span></code> 默认工作方式是大小写敏感的：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ grep -iR <span class="s1">&#39;somevar&#39;</span> .
 </pre></div>
 </div>
-<p>而且，你也可以用 <tt class="docutils literal"><span class="pre">grep</span> <span class="pre">-l</span></tt> 光打印出符合条件的文件名而非文件内容选段。这样一来，你又可以用来建立并导出文件列表到某些文本编辑器了：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>vim -O <span class="k">$(</span>grep -lR <span class="s1">&#39;somevar&#39;</span> .<span class="k">)</span>
+<p>而且，你也可以用 <code class="docutils literal"><span class="pre">grep</span> <span class="pre">-l</span></code> 光打印出符合条件的文件名而非文件内容选段。这样一来，你又可以用来建立并导出文件列表到某些文本编辑器了：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ vim -O <span class="k">$(</span>grep -lR <span class="s1">&#39;somevar&#39;</span> .<span class="k">)</span>
 </pre></div>
 </div>
-<p>如果你在你的项目里使用了版本控制软件，它通常会在 <tt class="docutils literal"><span class="pre">.svn</span></tt>， <tt class="docutils literal"><span class="pre">.git</span></tt>， <tt class="docutils literal"><span class="pre">.hg</span></tt> 目录下包含一些元数据。你也可以很容易地用 <tt class="docutils literal"><span class="pre">grep</span> <span class="pre">-v</span></tt> 把这些目录移出搜索范围，当然得用 <tt class="docutils literal"><span class="pre">grep</span> <span class="pre">-F</span></tt> 指定一个恰当且确定的字符串，即要移除的目录名：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>grep -R <span class="s1">&#39;someVar&#39;</span> . | grep -vF <span class="s1">&#39;.svn&#39;</span>
+<p>如果你在你的项目里使用了版本控制软件，它通常会在 <code class="docutils literal"><span class="pre">.svn</span></code>， <code class="docutils literal"><span class="pre">.git</span></code>， <code class="docutils literal"><span class="pre">.hg</span></code> 目录下包含一些元数据。你也可以很容易地用 <code class="docutils literal"><span class="pre">grep</span> <span class="pre">-v</span></code> 把这些目录移出搜索范围，当然得用 <code class="docutils literal"><span class="pre">grep</span> <span class="pre">-F</span></code> 指定一个恰当且确定的字符串，即要移除的目录名：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ grep -R <span class="s1">&#39;someVar&#39;</span> . <span class="p">|</span> grep -vF <span class="s1">&#39;.svn&#39;</span>
 </pre></div>
 </div>
-<p>当然，还有另外一种很流行的 <a class="reference external" href="http://betterthangrep.com/">代替 grep</a> 的工具叫做 <tt class="docutils literal"><span class="pre">ack</span></tt>，默认情况下它就帮你把上面那些个麻烦的东西免除了。它同样也支持大多数黑客最爱的 Perl 兼容的正则表达式（PCRE）。而且它还有很多实用功能来帮助你完成有关源代码的工作。当然使用古朴的 <tt class="docutils literal"><span class="pre">grep</span></tt> 没什么不好的，无论怎样它是 Unix 系统自带的，但是如果你可以安装 <tt class="docutils literal"><span class="pre">ack</span></tt>，我还是非常推荐的。现在你已经可以很容易地用个叫 <tt class="docutils literal"><span class="pre">ack-grep</span></tt> Debian 包或者一个 Perl 脚本来安装。</p>
-<p>我提到用一些较新的 Perl 脚本来代替经典工具 <tt class="docutils literal"><span class="pre">grep</span></tt> 可能会让一些 Unix 纯粹主义者很不爽。但是我不认为 Unix 哲学或以 Unix 作 IDE ，就是非要在有一些可用来解决新问题的工具时反而使用一些“古典”工具，毕竟这些新工具跟那些“古典”工具在思想上是一致的。</p>
+<p>当然，还有另外一种很流行的 <a class="reference external" href="http://betterthangrep.com/">代替 grep</a> 的工具叫做 <code class="docutils literal"><span class="pre">ack</span></code>，默认情况下它就帮你把上面那些个麻烦的东西免除了。它同样也支持大多数黑客最爱的 Perl 兼容的正则表达式（PCRE）。而且它还有很多实用功能来帮助你完成有关源代码的工作。当然使用古朴的 <code class="docutils literal"><span class="pre">grep</span></code> 没什么不好的，无论怎样它是 Unix 系统自带的，但是如果你可以安装 <code class="docutils literal"><span class="pre">ack</span></code>，我还是非常推荐的。现在你已经可以很容易地用个叫 <code class="docutils literal"><span class="pre">ack-grep</span></code> Debian 包或者一个 Perl 脚本来安装。</p>
+<p>我提到用一些较新的 Perl 脚本来代替经典工具 <code class="docutils literal"><span class="pre">grep</span></code> 可能会让一些 Unix 纯粹主义者很不爽。但是我不认为 Unix 哲学或以 Unix 作 IDE ，就是非要在有一些可用来解决新问题的工具时反而使用一些“古典”工具，毕竟这些新工具跟那些“古典”工具在思想上是一致的。</p>
 </div>
 <div class="section" id="id5">
 <h2>文件元数据<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">file</span></tt> 工具可以对所给的文件一行简短的介绍，它用文件后缀、头部信息和一些其他的线索来判断文件。你在检查一堆你不熟悉的文件时把它和 <tt class="docutils literal"><span class="pre">find</span></tt> 和 <tt class="docutils literal"><span class="pre">xargs</span></tt> 组合使用就非常方便了：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>find | xargs file
+<p><code class="docutils literal"><span class="pre">file</span></code> 工具可以对所给的文件一行简短的介绍，它用文件后缀、头部信息和一些其他的线索来判断文件。你在检查一堆你不熟悉的文件时把它和 <code class="docutils literal"><span class="pre">find</span></code> 和 <code class="docutils literal"><span class="pre">xargs</span></code> 组合使用就非常方便了：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ find <span class="p">|</span> xargs file
 .:            directory
 ./hanoi:      Perl script, ASCII text executable
 ./.hanoi.swp: Vim swap file, version 7.3
 ./factorial:  Perl script, ASCII text executable
-./bits.c:     C <span class="nb">source</span>, ASCII text
+./bits.c:     C source, ASCII text
 ./bits:       ELF 32-bit LSB executable, Intel 80386, version ...
 </pre></div>
 </div>
@@ -195,7 +196,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>导航</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -207,12 +208,12 @@
         <li class="right" >
           <a href="introduction.html" title="前言"
              >上一页</a> |</li>
-        <li><a href="index.html">Unix 即集成开发环境 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Unix 即集成开发环境 1.0 文档</a> &#187;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; 版权所有 Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
-      使用 <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+      由 <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8 创建。
     </div>
   </body>
 </html>

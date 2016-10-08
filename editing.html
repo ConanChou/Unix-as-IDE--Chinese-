@@ -1,20 +1,19 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_CN">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>编辑器 &mdash; Unix 即集成开发环境 1.0 documentation</title>
+    <title>编辑器 &#8212; Unix 即集成开发环境 1.0 文档</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -25,12 +24,14 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
-    <link rel="top" title="Unix 即集成开发环境 1.0 documentation" href="index.html" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="top" title="Unix 即集成开发环境 1.0 文档" href="index.html" />
     <link rel="next" title="编译" href="compiling.html" />
     <link rel="prev" title="文件" href="files.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>导航</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -42,23 +43,23 @@
         <li class="right" >
           <a href="files.html" title="文件"
              accesskey="P">上一页</a> |</li>
-        <li><a href="index.html">Unix 即集成开发环境 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Unix 即集成开发环境 1.0 文档</a> &#187;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="id1">
 <h1>编辑器<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <p>文本编辑器对所有程序员来说都是核心工具，这也是为什么它会引发虽不当真却也狂热的争议。Unix，很显而易见的，是与两大最经久不衰的受宠编辑器最有渊源的操作系统。这两个编辑器是 Emacs 和 Vi，它们的现代版本便是 GNU Emacs 和 Vim，两个编辑哲学迥异的编辑器在效能上却旗鼓相当。</p>
 <p>作为 Vim 的异教徒，我来聊聊 Vim 对于编程不可或缺的功能，具体来说就是从 Vim 里调用 Linux shell 工具来完善编辑器的内建功能性。这里谈到的一些原理对 Emacs 也适用，但是对那些欠强大的编辑器来说并无参考价值，比如 Nano。</p>
-<p>这篇帖子只能是纵览全局，毕竟 Vim 的编程工具组非常多，但即使是很泛泛地谈，它也会是一篇相当长的帖子。我会把重点放在要点和一些我认为很有帮助的东西上，并且有可能的话提供一些文章的链接以便对此话题有更加全面的了解。同时也别忘了 Vim 的 <tt class="docutils literal"><span class="pre">:help</span></tt>，很多新人都没有想到这份文档是如此高质量又好用。</p>
+<p>这篇帖子只能是纵览全局，毕竟 Vim 的编程工具组非常多，但即使是很泛泛地谈，它也会是一篇相当长的帖子。我会把重点放在要点和一些我认为很有帮助的东西上，并且有可能的话提供一些文章的链接以便对此话题有更加全面的了解。同时也别忘了 Vim 的 <code class="docutils literal"><span class="pre">:help</span></code>，很多新人都没有想到这份文档是如此高质量又好用。</p>
 <div class="section" id="id2">
 <h2>文件类型侦测<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
-<p>Vim 有内建的设置用于调整其运作方式，具体来说比如它基于被加载的文件类型进行句法高亮，这么做一直非常有效。另外，文件类型的侦测还可以让你根据某种语言常规的书写风格为此语言设置特定的缩进风格。这应该是第一批你需要加进 <tt class="docutils literal"><span class="pre">.vimrc</span></tt> 里的一部分：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="k">if </span>has<span class="o">(</span><span class="s2">&quot;autocmd&quot;</span><span class="o">)</span>
+<p>Vim 有内建的设置用于调整其运作方式，具体来说比如它基于被加载的文件类型进行句法高亮，这么做一直非常有效。另外，文件类型的侦测还可以让你根据某种语言常规的书写风格为此语言设置特定的缩进风格。这应该是第一批你需要加进 <code class="docutils literal"><span class="pre">.vimrc</span></code> 里的一部分：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="k">if</span> has<span class="o">(</span><span class="s2">&quot;autocmd&quot;</span><span class="o">)</span>
     filetype on
     filetype indent on
     filetype plugin on
@@ -68,8 +69,8 @@ endif
 </div>
 <div class="section" id="id3">
 <h2>句法高亮<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
-<p>即便你只是在16位色的命令行下工作，如果你还没有这么做，那赶紧在你的 <tt class="docutils literal"><span class="pre">.vimrc</span></tt> 里加入这句话吧：</p>
-<div class="highlight-bash"><div class="highlight"><pre>syntax on
+<p>即便你只是在16位色的命令行下工作，如果你还没有这么做，那赶紧在你的 <code class="docutils literal"><span class="pre">.vimrc</span></code> 里加入这句话吧：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>syntax on
 </pre></div>
 </div>
 <p>默认的16位色的命令行配色不怎么好看也是不得已，但是他们已经起到作用了，绝大多数语言的句法定义文件是可轻易获取的，而且它们的效果都不错。这儿有 <a class="reference external" href="http://code.google.com/p/vimcolorschemetest/">一大堆配色方案</a>，而且调整甚至自己写都不困难。当然用 <a class="reference external" href="http://vim.wikia.com/wiki/256_colors_in_vim">256色的命令行</a> 或 gVim 会提供更多选项。好的句法高亮文件还会在有明显句法错误的时候用醒目的红色背景标示。</p>
@@ -77,112 +78,112 @@ endif
 <div class="section" id="id6">
 <h2>行号<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
 <p>可能你在传统的 IDE 里经常使用，打开行号：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nb">set </span>number
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">set</span> number
 </pre></div>
 </div>
 <p>如果你现在在用高于 Vim 7.3 的版本，你可能也会想试试把绝对行号换成相对行号：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nb">set </span>relativenumber
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">set</span> relativenumber
 </pre></div>
 </div>
 </div>
 <div class="section" id="id7">
 <h2>标签文件<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
-<p>Vim 对 <tt class="docutils literal"><span class="pre">ctags</span></tt> 实用工具的输出 <a class="reference external" href="http://amix.dk/blog/post/19329">支持得很好</a>。它能让你快速地在整个项目中搜索某个特定的标示符；或者不管在不在同一个文件，直接从某变量被使用的地方跳转到该变量被申明的位置。对还有多个文件的 C 语言项目，这可以节省大把本来会被浪费掉的时间，而且很有可能 Vim 是目前有类似功能的主流 IDE 中最好的。</p>
-<p>在你的项目根目录下（很多流行的编程语言都可以）运行 <tt class="docutils literal"><span class="pre">:!ctags</span> <span class="pre">-R</span></tt> 来生成 <tt class="docutils literal"><span class="pre">tags</span></tt> 文件，此文件里是整个项目里所有的申明和标示符的位置。一旦 <tt class="docutils literal"><span class="pre">ctags</span></tt> 文件被生成，你就可以像下面这样来搜索某些标签了：</p>
-<div class="highlight-bash"><div class="highlight"><pre>:tag someClass
+<p>Vim 对 <code class="docutils literal"><span class="pre">ctags</span></code> 实用工具的输出 <a class="reference external" href="http://amix.dk/blog/post/19329">支持得很好</a>。它能让你快速地在整个项目中搜索某个特定的标示符；或者不管在不在同一个文件，直接从某变量被使用的地方跳转到该变量被申明的位置。对还有多个文件的 C 语言项目，这可以节省大把本来会被浪费掉的时间，而且很有可能 Vim 是目前有类似功能的主流 IDE 中最好的。</p>
+<p>在你的项目根目录下（很多流行的编程语言都可以）运行 <code class="docutils literal"><span class="pre">:!ctags</span> <span class="pre">-R</span></code> 来生成 <code class="docutils literal"><span class="pre">tags</span></code> 文件，此文件里是整个项目里所有的申明和标示符的位置。一旦 <code class="docutils literal"><span class="pre">ctags</span></code> 文件被生成，你就可以像下面这样来搜索某些标签了：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>:tag someClass
 </pre></div>
 </div>
-<p>用 <tt class="docutils literal"><span class="pre">:tn</span></tt> 和 <tt class="docutils literal"><span class="pre">:tp</span></tt>，你就可以遍历搜索结果了。自带的标签功能已经可以满足你大部分的需求了，但是像标签列表窗口这样的功能，你可以是是安装很受欢迎的 <a class="reference external" href="http://vim-taglist.sourceforge.net/">Taglist 插件</a>。Tim Pope 的 <a class="reference external" href="https://github.com/tpope/vim-unimpaired">Unimpaired 插件</a> 也有一些有用的相关映射。</p>
+<p>用 <code class="docutils literal"><span class="pre">:tn</span></code> 和 <code class="docutils literal"><span class="pre">:tp</span></code>，你就可以遍历搜索结果了。自带的标签功能已经可以满足你大部分的需求了，但是像标签列表窗口这样的功能，你可以是是安装很受欢迎的 <a class="reference external" href="http://vim-taglist.sourceforge.net/">Taglist 插件</a>。Tim Pope 的 <a class="reference external" href="https://github.com/tpope/vim-unimpaired">Unimpaired 插件</a> 也有一些有用的相关映射。</p>
 </div>
 <div class="section" id="id9">
 <h2>调用外部程序<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
 <p>有两中主要方法可以在 Vim 里调用外部程序：</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">:!&lt;command&gt;</span></tt>——在从 Vim 内容跑某命令时很有用，尤其是在你想把运行结果输出到 Vim buffer 的情况下。</li>
-<li><tt class="docutils literal"><span class="pre">:shell</span></tt>——以 Vim 子进程的方式弹开一个命令行。适合交互式命令。</li>
+<li><code class="docutils literal"><span class="pre">:!&lt;command&gt;</span></code>——在从 Vim 内容跑某命令时很有用，尤其是在你想把运行结果输出到 Vim buffer 的情况下。</li>
+<li><code class="docutils literal"><span class="pre">:shell</span></code>——以 Vim 子进程的方式弹开一个命令行。适合交互式命令。</li>
 </ul>
-<p>第三种方法我不想在这里深入讨论，就是用像 <a class="reference external" href="http://code.google.com/p/conque/">Conque</a> 在 Vim buffer 里模拟命令行。我自己试了下发现几乎不能用，我敢断言这是个糟糕的设计。一下摘自 <tt class="docutils literal"><span class="pre">:help</span> <span class="pre">design-not:</span></tt>：</p>
+<p>第三种方法我不想在这里深入讨论，就是用像 <a class="reference external" href="http://code.google.com/p/conque/">Conque</a> 在 Vim buffer 里模拟命令行。我自己试了下发现几乎不能用，我敢断言这是个糟糕的设计。一下摘自 <code class="docutils literal"><span class="pre">:help</span> <span class="pre">design-not:</span></code>：</p>
 <blockquote>
 <div>Vim 不是 Shell 也不是操作系统。你不能在 Vim 里跑 Shell 也不能用它来控制调试器。相反的：把 Vim 当作 Shell 或 IDE 的一部分。</div></blockquote>
 <div class="section" id="lint">
 <h3>Lint 程序和句法检查器<a class="headerlink" href="#lint" title="永久链接至标题">¶</a></h3>
-<p>调用外部程序（如 <tt class="docutils literal"><span class="pre">perl</span> <span class="pre">-c</span></tt>, <tt class="docutils literal"><span class="pre">gcc</span></tt>）来检测句法是在 Vim 里用 <tt class="docutils literal"><span class="pre">:!</span></tt> 很好的例子。如果你在编写 Perl 文件，就可以这样跑：</p>
-<div class="highlight-bash"><div class="highlight"><pre>:!perl -c %
+<p>调用外部程序（如 <code class="docutils literal"><span class="pre">perl</span> <span class="pre">-c</span></code>, <code class="docutils literal"><span class="pre">gcc</span></code>）来检测句法是在 Vim 里用 <code class="docutils literal"><span class="pre">:!</span></code> 很好的例子。如果你在编写 Perl 文件，就可以这样跑：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>:!perl -c %
 
 /home/tom/project/test.pl syntax OK
 
-Press Enter or <span class="nb">type command </span>to <span class="k">continue</span>
+Press Enter or <span class="nb">type</span> <span class="nb">command</span> to <span class="k">continue</span>
 </pre></div>
 </div>
-<p>上面的百分号 <tt class="docutils literal"><span class="pre">%</span></tt> 是一种表示当前显示内容的简略方式。如果运行的命令有回显，那回显就会显示在命令下方。如果你需要经常调用句法检查器，你也可以在 <tt class="docutils literal"><span class="pre">.vimrc</span></tt> 里把它设置成命令，甚至再设置一个组合键。在这个例子里，我们可以定义一个 <tt class="docutils literal"><span class="pre">:PerlLint</span></tt> 命令，并且可以在正常模式下用 <tt class="docutils literal"><span class="pre">\l</span></tt> 触发（译者按：1. 作者指的正常模式是相对于 Vim 里的输入模式和选择模式； 2. 作者 Vim 的 <tt class="docutils literal"><span class="pre">&lt;leader&gt;</span></tt>
-键是用的 <tt class="docutils literal"><span class="pre">\</span></tt>，这个设置因人而异）：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nb">command </span>PerlLint !perl -c %
+<p>上面的百分号 <code class="docutils literal"><span class="pre">%</span></code> 是一种表示当前显示内容的简略方式。如果运行的命令有回显，那回显就会显示在命令下方。如果你需要经常调用句法检查器，你也可以在 <code class="docutils literal"><span class="pre">.vimrc</span></code> 里把它设置成命令，甚至再设置一个组合键。在这个例子里，我们可以定义一个 <code class="docutils literal"><span class="pre">:PerlLint</span></code> 命令，并且可以在正常模式下用 <code class="docutils literal"><span class="pre">\l</span></code> 触发（译者按：1. 作者指的正常模式是相对于 Vim 里的输入模式和选择模式； 2. 作者 Vim 的 <code class="docutils literal"><span class="pre">&lt;leader&gt;</span></code>
+键是用的 <code class="docutils literal"><span class="pre">\</span></code>，这个设置因人而异）：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">command</span> PerlLint !perl -c %
 nnoremap &lt;leader&gt;l :PerlLint&lt;CR&gt;
 </pre></div>
 </div>
-<p>对不少语言而言其实都有一个更好的办法来实现以上的事情，而且将要谈的这个方法能让我们利用起 Vim 自带的 quickfix 窗口。首先我们要对特定的文件类型设置一个合适的 <tt class="docutils literal"><span class="pre">makeprg</span></tt>,在这个例子里面，包含可以被 Vim 用以输出到 quicklist 的模块并定义两种输出格式：</p>
-<div class="highlight-bash"><div class="highlight"><pre>:set <span class="nv">makeprg</span><span class="o">=</span>perl<span class="se">\ </span>-c<span class="se">\ </span>-MVi::QuickFix<span class="se">\ </span>%
+<p>对不少语言而言其实都有一个更好的办法来实现以上的事情，而且将要谈的这个方法能让我们利用起 Vim 自带的 quickfix 窗口。首先我们要对特定的文件类型设置一个合适的 <code class="docutils literal"><span class="pre">makeprg</span></code>,在这个例子里面，包含可以被 Vim 用以输出到 quicklist 的模块并定义两种输出格式：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>:set <span class="nv">makeprg</span><span class="o">=</span>perl<span class="se">\ </span>-c<span class="se">\ </span>-MVi::QuickFix<span class="se">\ </span>%
 :set errorformat+<span class="o">=</span>%m<span class="se">\ </span>at<span class="se">\ </span>%f<span class="se">\ </span>line<span class="se">\ </span>%l<span class="se">\.</span>
 :set errorformat+<span class="o">=</span>%m<span class="se">\ </span>at<span class="se">\ </span>%f<span class="se">\ </span>line<span class="se">\ </span>%l
 </pre></div>
 </div>
-<p>你有可能先得从 CPAN 或 Debian 包管理器安装 <tt class="docutils literal"><span class="pre">libvi-quickfix-perl</span></tt> 模块。安装完成，保存文档，然后输入 <tt class="docutils literal"><span class="pre">:make</span></tt> 来检查句法。如果找到错误了，你可以用 <tt class="docutils literal"><span class="pre">:copen</span></tt> 打开 quicklist 窗口检查那些错误。用 <tt class="docutils literal"><span class="pre">:cn</span></tt> 和 <tt class="docutils literal"><span class="pre">:cp</span></tt> 上下移动。</p>
-<div class="figure">
+<p>你有可能先得从 CPAN 或 Debian 包管理器安装 <code class="docutils literal"><span class="pre">libvi-quickfix-perl</span></code> 模块。安装完成，保存文档，然后输入 <code class="docutils literal"><span class="pre">:make</span></code> 来检查句法。如果找到错误了，你可以用 <code class="docutils literal"><span class="pre">:copen</span></code> 打开 quicklist 窗口检查那些错误。用 <code class="docutils literal"><span class="pre">:cn</span></code> 和 <code class="docutils literal"><span class="pre">:cp</span></code> 上下移动。</p>
+<div class="figure" id="id16">
 <img alt="vim-quickfix" src="_images/vim-quickfix.png" />
-<p class="caption">用 Vim quickfix 检测一个 Perl 文件</p>
+<p class="caption"><span class="caption-text">用 Vim quickfix 检测一个 Perl 文件</span></p>
 </div>
 <p>这种方法同样也适用于 <a class="reference external" href="http://tldp.org/HOWTO/C-editing-with-VIM-HOWTO/quickfix.html">gcc</a> 的输出，以及几乎其他任何一种句法检测的输出，输出包括文件名、行号、错误信息。它甚至可以支持 <a class="reference external" href="http://stackoverflow.com/questions/7193547/debugging-php-with-vim-using-quickfix">像 PHP 一样专注于网页的语言</a>，还有像 <a class="reference external" href="https://github.com/hallettj/jslint.vim">JSLint for JavaScript</a>
 这样的工具。另外还有一个非常棒的插件叫 <a class="reference external" href="http://www.vim.org/scripts/script.php?script_id=2736">Syntastic</a> 也有类似的功效。</p>
 </div>
 <div class="section" id="id10">
 <h3>从其他命令读取输出<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
-<p>你可以用 <tt class="docutils literal"><span class="pre">:r!</span></tt> 把呼叫命令的回显直接贴到当前工作的文档里。例如，把当前目录的文档列表放进当前编辑文件就可以输入：</p>
-<div class="highlight-bash"><div class="highlight"><pre>:r!ls
+<p>你可以用 <code class="docutils literal"><span class="pre">:r!</span></code> 把呼叫命令的回显直接贴到当前工作的文档里。例如，把当前目录的文档列表放进当前编辑文件就可以输入：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>:r!ls
 </pre></div>
 </div>
-<p>这种读取方式当然不光可以用在命令回显；你可以用 <tt class="docutils literal"><span class="pre">:r</span></tt> 轻松读进其他文件的内容，比如你的公钥或是你自定义的样版文件：</p>
-<div class="highlight-bash"><div class="highlight"><pre>:r ~/.ssh/id_rsa.pub
+<p>这种读取方式当然不光可以用在命令回显；你可以用 <code class="docutils literal"><span class="pre">:r</span></code> 轻松读进其他文件的内容，比如你的公钥或是你自定义的样版文件：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>:r ~/.ssh/id_rsa.pub
 :r ~/dev/perl/boilerplate/copyright.pl
 </pre></div>
 </div>
 </div>
 <div class="section" id="id11">
 <h3>用其他命令过滤输出<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h3>
-<p>加以延伸，其实你可以把 Vim buffer 里的文字放进外部命令过滤，或者是用选择模式选择一个文本区块，然后用命令的输出覆盖。因为 Vim 的块状选择模式很适合用在柱形数据，所以它很适合配合 <tt class="docutils literal"><span class="pre">column</span></tt>、 <tt class="docutils literal"><span class="pre">cut</span></tt>、 <tt class="docutils literal"><span class="pre">sort</span></tt>、 <tt class="docutils literal"><span class="pre">awk</span></tt> 等类似的工具使用。</p>
+<p>加以延伸，其实你可以把 Vim buffer 里的文字放进外部命令过滤，或者是用选择模式选择一个文本区块，然后用命令的输出覆盖。因为 Vim 的块状选择模式很适合用在柱形数据，所以它很适合配合 <code class="docutils literal"><span class="pre">column</span></code>、 <code class="docutils literal"><span class="pre">cut</span></code>、 <code class="docutils literal"><span class="pre">sort</span></code>、 <code class="docutils literal"><span class="pre">awk</span></code> 等类似的工具使用。</p>
 <p>例如，你可以将整个文件按第二列逆序排列：</p>
-<div class="highlight-bash"><div class="highlight"><pre>:%!sort -k2 -r
+<div class="highlight-bash"><div class="highlight"><pre><span></span>:%!sort -k2 -r
 </pre></div>
 </div>
-<p>你可以在所选则文字中找到符合 <tt class="docutils literal"><span class="pre">/vim/</span></tt> 样式并只显示其中的第三列：</p>
-<div class="highlight-bash"><div class="highlight"><pre>:<span class="s1">&#39;&lt;,&#39;</span>&gt;!awk <span class="s1">&#39;/vim/ {print $3}&#39;</span>
+<p>你可以在所选则文字中找到符合 <code class="docutils literal"><span class="pre">/vim/</span></code> 样式并只显示其中的第三列：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>:<span class="s1">&#39;&lt;,&#39;</span>&gt;!awk <span class="s1">&#39;/vim/ {print $3}&#39;</span>
 </pre></div>
 </div>
 <p>你也可以把前10行的关键词用漂亮的行列格式排好：</p>
-<div class="highlight-bash"><div class="highlight"><pre>:1,10!column -t
+<div class="highlight-bash"><div class="highlight"><pre><span></span>:1,10!column -t
 </pre></div>
 </div>
 <p>真的，所有类型的文字过滤器或命令都可以像上面的例子一样用在 Vim 里，一个简单的互操作性就可以让编辑器的能力无限延伸。这很有效地将 Vim buffer 变成了字符流，而字符流正是这些经典工具之间用以交流的语言。</p>
 </div>
 <div class="section" id="id12">
 <h3>自带的其他选择<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
-<p>值得注意的是，像排序和查找之类常见的操作，Vim 有其自带的方法 <tt class="docutils literal"><span class="pre">:sort</span></tt> 和 <tt class="docutils literal"><span class="pre">:grep</span></tt>，这些或许在你在 Windows 下用 Vim 时遇到困难时很有帮助，但是这些自带方法并不具备适应 shell 命令的能力。</p>
+<p>值得注意的是，像排序和查找之类常见的操作，Vim 有其自带的方法 <code class="docutils literal"><span class="pre">:sort</span></code> 和 <code class="docutils literal"><span class="pre">:grep</span></code>，这些或许在你在 Windows 下用 Vim 时遇到困难时很有帮助，但是这些自带方法并不具备适应 shell 命令的能力。</p>
 </div>
 </div>
 <div class="section" id="id13">
 <h2>对比文件<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h2>
-<p>Vim 有个 <em>diffing</em> 模式，即 <tt class="docutils literal"><span class="pre">vimdiff</span></tt>，它不当允许你查看不同版本文件间的区别，还提供三向合并用以解决版本冲突，你可以用 <tt class="docutils literal"><span class="pre">:diffput</span></tt> 和 <tt class="docutils literal"><span class="pre">:diffget</span></tt> 这样的命令来选择合适的代码段。你可以在命令行下直接运行 <tt class="docutils literal"><span class="pre">vimdiff</span></tt>，需要至少两个文件才能做对比：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>vimdiff file-v1.c file-v2.c
+<p>Vim 有个 <em>diffing</em> 模式，即 <code class="docutils literal"><span class="pre">vimdiff</span></code>，它不当允许你查看不同版本文件间的区别，还提供三向合并用以解决版本冲突，你可以用 <code class="docutils literal"><span class="pre">:diffput</span></code> 和 <code class="docutils literal"><span class="pre">:diffget</span></code> 这样的命令来选择合适的代码段。你可以在命令行下直接运行 <code class="docutils literal"><span class="pre">vimdiff</span></code>，需要至少两个文件才能做对比：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ vimdiff file-v1.c file-v2.c
 </pre></div>
 </div>
-<div class="figure">
+<div class="figure" id="id17">
 <a class="reference internal image-reference" href="_images/vim-diff.png"><img alt="vim-diff" src="_images/vim-diff.png" style="width: 856.8px; height: 470.4px;" /></a>
-<p class="caption">用 Vimdiff 对比 .vimrc 文件</p>
+<p class="caption"><span class="caption-text">用 Vimdiff 对比 .vimrc 文件</span></p>
 </div>
 </div>
 <div class="section" id="id14">
 <h2>版本控制<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h2>
-<p>你可以在 Vim 下直接调用版本控制的命令，这可能也是你大多数时候最需要的。<tt class="docutils literal"><span class="pre">%</span></tt> 永远是当前激活显示窗口的内容，记住这点非常有用：</p>
-<div class="highlight-bash"><div class="highlight"><pre>:!svn status
+<p>你可以在 Vim 下直接调用版本控制的命令，这可能也是你大多数时候最需要的。<code class="docutils literal"><span class="pre">%</span></code> 永远是当前激活显示窗口的内容，记住这点非常有用：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>:!svn status
 :!svn add %
 :!git commit -a
 </pre></div>
@@ -200,7 +201,7 @@ nnoremap &lt;leader&gt;l :PerlLint&lt;CR&gt;
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>导航</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -212,12 +213,12 @@ nnoremap &lt;leader&gt;l :PerlLint&lt;CR&gt;
         <li class="right" >
           <a href="files.html" title="文件"
              >上一页</a> |</li>
-        <li><a href="index.html">Unix 即集成开发环境 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Unix 即集成开发环境 1.0 文档</a> &#187;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; 版权所有 Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
-      使用 <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+      由 <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8 创建。
     </div>
   </body>
 </html>
