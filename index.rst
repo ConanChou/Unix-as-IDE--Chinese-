@@ -46,7 +46,8 @@ Unix 即集成开发环境
 ------
 
 本翻译项目的贡献者： `ConanChou <https://github.com/ConanChou>`_\，
-`ccl13 <https://github.com/ccl13>`_\。
+`ccl13 <https://github.com/ccl13>`_\，
+`A2ZH <https://github.com/theJian>`_\。
 
 .. Indices and tables
    ==================
