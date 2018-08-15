@@ -13,6 +13,6 @@
 * 项目主页[Unix as IDE (Chinese)](https://github.com/ConanChou/Unix-as-IDE--Chinese-)。
 
 # 贡献者
-本翻译项目的贡献者是：[ConanChou](https://github.com/ConanChou), [ccl13](https://github.com/ccl13), [A2ZH](https://github.com/theJian), [Peter](https://github.com/petergithub)，[Derrick](https://github.com/zillou)。
+本翻译项目的贡献者是：[ConanChou](https://github.com/ConanChou), [ccl13](https://github.com/ccl13), [A2ZH](https://github.com/theJian), [Peter](https://github.com/petergithub), [Derrick](https://github.com/zillou)。
 
 也请未来的维护和贡献者们在提交 PR 时将自己的用户名和链接更新到本文件和 `index.rst` 文件 （或者谁来写一个脚本自动化这个也行：））
